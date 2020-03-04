@@ -8,12 +8,12 @@ import org.openqa.selenium.remote.RemoteWebElement;
 
 public class ElementLocationTest extends BaseTest {
     @Test
-    public void locatesElement() {
+    public void locatesElementFromAction() {
         browser.get("https://www.saucedemo.com");
 
         HTMLElement htmlElement = browser.element(By.id("user-name"));
 
-        htmlElement.locate();
+        htmlElement.click();
 
         Assert.assertEquals(RemoteWebElement.class, htmlElement.getElement().getClass());
     }
