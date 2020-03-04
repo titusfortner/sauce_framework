@@ -16,4 +16,10 @@ public class HTMLElement {
         this.browser = browser;
         this.locator = locator;
     }
+
+    public void locate() {
+        if (this.element == null) {
+            this.element = browser.getDriver().findElement(locator);
+        }
+    }
 }
