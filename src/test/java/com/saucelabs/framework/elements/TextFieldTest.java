@@ -14,7 +14,7 @@ public class TextFieldTest extends BaseTest {
 
         textField.sendKeys("Foo");
 
-        Assert.assertEquals("Foo", textField.getValue());
+        Assert.assertEquals("Foo", textField.get());
     }
 
     @Test

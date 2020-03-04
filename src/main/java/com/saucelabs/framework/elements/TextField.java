@@ -21,4 +21,8 @@ public class TextField extends HTMLElement {
     public void sendKeys(String text) {
         synchronizer.act(this, () -> getElement().sendKeys(text));
     }
+
+    public String get() {
+        return getValue();
+    }
 }
