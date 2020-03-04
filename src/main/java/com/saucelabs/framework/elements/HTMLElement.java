@@ -11,11 +11,13 @@ public class HTMLElement {
     private By locator;
     private Browser browser;
     private WebElement element;
+    private Synchronizer synchronizer;
 
 
     public HTMLElement(Browser browser, By locator) {
         this.browser = browser;
         this.locator = locator;
+        this.synchronizer = new Synchronizer();
     }
 
     // This always checks instead of relying on cache
@@ -34,8 +36,7 @@ public class HTMLElement {
     }
 
     public void click() {
-        locate();
-        getElement().click();
+        synchronizer.act(this, () -> getElement().click());
     }
 
     void locate() {
