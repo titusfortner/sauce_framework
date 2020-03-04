@@ -1,11 +1,12 @@
-package com.saucelabs.framework;
+package com.saucelabs.framework.elements;
 
+import com.saucelabs.framework.BaseTest;
 import com.saucelabs.framework.elements.HTMLElement;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-public class ElementPredicateTest extends BaseTest {
+public class PredicateTest extends BaseTest {
     @Test
     public void elementExists() {
         browser.get("https://www.saucedemo.com");

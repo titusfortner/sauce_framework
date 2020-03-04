@@ -1,5 +1,6 @@
-package com.saucelabs.framework;
+package com.saucelabs.framework.elements;
 
+import com.saucelabs.framework.BaseTest;
 import com.saucelabs.framework.elements.HTMLElement;
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class ElementCreationTest extends BaseTest {
+public class CreationTest extends BaseTest {
     @Test
     public void createsElementFromLocator() {
         HTMLElement htmlElement = browser.element(By.id("foo"));

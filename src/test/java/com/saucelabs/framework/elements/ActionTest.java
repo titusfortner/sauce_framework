@@ -1,11 +1,12 @@
-package com.saucelabs.framework;
+package com.saucelabs.framework.elements;
 
+import com.saucelabs.framework.BaseTest;
 import com.saucelabs.framework.elements.HTMLElement;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-public class ElementActionTest extends BaseTest {
+public class ActionTest extends BaseTest {
     @Test
     public void clicksElement() {
         browser.get("https://www.saucedemo.com");
