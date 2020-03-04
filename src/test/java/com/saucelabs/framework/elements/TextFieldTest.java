@@ -14,7 +14,7 @@ public class TextFieldTest extends BaseTest {
 
         textField.sendKeys("Foo");
 
-        Assert.assertEquals("Foo", textField.value());
+        Assert.assertEquals("Foo", textField.getValue());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class TextFieldTest extends BaseTest {
         textField.sendKeys("Bar");
         textField.set("Foo");
 
-        Assert.assertEquals("Foo", textField.value());
+        Assert.assertEquals("Foo", textField.getValue());
     }
 
     @Test
@@ -38,7 +38,7 @@ public class TextFieldTest extends BaseTest {
         textField.sendKeys("Bar");
         textField.clear();
 
-        Assert.assertEquals("", textField.value());
+        Assert.assertEquals("", textField.getValue());
     }
 
 }

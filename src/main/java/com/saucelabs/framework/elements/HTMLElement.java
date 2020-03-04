@@ -51,8 +51,12 @@ public class HTMLElement {
     // INFORMATION METHODS
     //
 
-    public String value() {
-        return this.element.getAttribute("value");
+    public String getAttribute(String attribute) {
+        return this.element.getAttribute(attribute);
+    }
+
+    public String getValue() {
+        return getAttribute("value");
     }
 
     //
