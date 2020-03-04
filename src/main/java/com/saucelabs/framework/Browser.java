@@ -1,17 +1,18 @@
 package com.saucelabs.framework;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class Browser {
     RemoteWebDriver driver;
 
+    public Browser(String platform) {
+        PlatformFactory factory = new PlatformFactory(platform);
+        this.driver = factory.getDriver();
+    }
+
     public Browser() {
-        System.setProperty("wdm.targetPath", "lib/drivers/auto/");
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        this("chrome");
     }
 
     public WebDriver getDriver() {
