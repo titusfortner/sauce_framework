@@ -19,4 +19,12 @@ public class BrowserTest {
         Assert.assertEquals(FirefoxDriver.class, browser.getDriver().getClass());
         browser.close();
     }
+
+    @Test
+    public void acceptsDriver() {
+        ChromeDriver driver = new ChromeDriver();
+        Browser browser = new Browser(driver);
+        Assert.assertEquals(driver, browser.getDriver());
+        browser.close();
+    }
 }
