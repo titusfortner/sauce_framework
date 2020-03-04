@@ -5,10 +5,9 @@ import lombok.Getter;
 import lombok.experimental.Delegate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class Browser {
-    @Delegate @Getter private RemoteWebDriver driver;
+    @Delegate @Getter private WebDriver driver;
 
     public Browser(String platform) {
         PlatformFactory factory = new PlatformFactory(platform);
@@ -19,15 +18,11 @@ public class Browser {
         this("chrome");
     }
 
-    public Browser(RemoteWebDriver driver) {
+    public Browser(WebDriver driver) {
         this.driver = driver;
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
     public HTMLElement element(By locator) {
-        return new HTMLElement(locator);
+        return new HTMLElement(this, locator);
     }
 }

@@ -1,15 +1,19 @@
 package com.saucelabs.framework.elements;
 
+import com.saucelabs.framework.Browser;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+@Getter
 public class HTMLElement {
-    @Getter private By locator;
-    @Getter private WebElement element;
+    private By locator;
+    private Browser browser;
+    private WebElement element;
 
 
-    public HTMLElement(By locator) {
+    public HTMLElement(Browser browser, By locator) {
+        this.browser = browser;
         this.locator = locator;
     }
 }
