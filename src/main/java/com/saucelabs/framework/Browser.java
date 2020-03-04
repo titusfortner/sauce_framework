@@ -1,9 +1,11 @@
 package com.saucelabs.framework;
 
+import lombok.experimental.Delegate;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class Browser {
+    @Delegate
     RemoteWebDriver driver;
 
     public Browser(String platform) {
@@ -21,9 +23,5 @@ public class Browser {
 
     public WebDriver getDriver() {
         return driver;
-    }
-
-    public void close() {
-        driver.quit();
     }
 }
