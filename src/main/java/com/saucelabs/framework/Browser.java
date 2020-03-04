@@ -1,6 +1,7 @@
 package com.saucelabs.framework;
 
 import com.saucelabs.framework.elements.HTMLElement;
+import com.saucelabs.framework.elements.TextField;
 import lombok.Getter;
 import lombok.experimental.Delegate;
 import org.openqa.selenium.By;
@@ -24,5 +25,9 @@ public class Browser {
 
     public HTMLElement element(By locator) {
         return new HTMLElement(this, locator);
+    }
+
+    public TextField textField(By locator) {
+        return new TextField(this, locator);
     }
 }

@@ -11,7 +11,7 @@ public class HTMLElement {
     private By locator;
     private Browser browser;
     private WebElement element;
-    private Synchronizer synchronizer;
+    Synchronizer synchronizer;
 
 
     public HTMLElement(Browser browser, By locator) {
@@ -19,6 +19,10 @@ public class HTMLElement {
         this.locator = locator;
         this.synchronizer = new Synchronizer();
     }
+
+    //
+    // PREDICATE METHODS
+    //
 
     // This always checks instead of relying on cache
     public boolean doesExist() {
@@ -35,9 +39,25 @@ public class HTMLElement {
         return doesExist() && element.isDisplayed();
     }
 
+    //
+    // ACTION METHODS
+    //
+
     public void click() {
         synchronizer.act(this, () -> getElement().click());
     }
+
+    //
+    // INFORMATION METHODS
+    //
+
+    public String value() {
+        return this.element.getAttribute("value");
+    }
+
+    //
+    // RESTRICTED METHODS
+    //
 
     void locate() {
         if (this.element == null) {
