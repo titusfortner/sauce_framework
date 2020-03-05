@@ -1,5 +1,6 @@
 package com.saucelabs.framework.pages;
 
+import com.saucelabs.framework.data.User;
 import com.saucelabs.framework.elements.HTMLElement;
 import com.saucelabs.framework.elements.TextField;
 import lombok.Getter;
@@ -19,9 +20,9 @@ public class Login extends PageObject {
         return login;
     }
 
-    public void login(String username, String pwd) {
-        this.username.sendKeys(username);
-        password.sendKeys(pwd);
+    public void login(User valid) {
+        username.sendKeys(valid.getUsername());
+        password.sendKeys(valid.getPassword());
         submit.click();
     }
 }
