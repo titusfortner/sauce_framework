@@ -2,6 +2,7 @@ package com.saucelabs.framework.pages;
 
 import com.saucelabs.framework.Browser;
 import com.saucelabs.framework.elements.HTMLElement;
+import com.saucelabs.framework.elements.TextField;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,15 @@ public abstract class PageObject {
     @Getter public String url;
 
     public HTMLElement element(Callable<HTMLElement> block) {
+        try {
+            return block.call();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public TextField textField(Callable<TextField> block) {
         try {
             return block.call();
         } catch (Exception e) {
