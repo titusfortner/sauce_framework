@@ -36,4 +36,14 @@ public class ElementTest extends BaseTest {
 
         Assert.assertEquals("standard_user", login.getUserName().getValue());
     }
+
+    @Test
+    public void methodActsOnElements() {
+        PageObject.setBrowser(browser);
+
+        Login login = Login.visit();
+        login.login("standard_user", "secret_sauce");
+
+        Assert.assertFalse(login.isOnPage());
+    }
 }
