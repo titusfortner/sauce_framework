@@ -23,8 +23,8 @@ public class ElementTest extends BaseTest {
         PageObject.setBrowser(browser);
 
         Login login = Login.visit();
-        Assert.assertEquals(TextField.class, login.getUserName().getClass());
-        Assert.assertTrue(login.getUserName().doesExist());
+        Assert.assertEquals(TextField.class, login.getUsername().getClass());
+        Assert.assertTrue(login.getUsername().doesExist());
     }
 
     @Test
@@ -32,9 +32,9 @@ public class ElementTest extends BaseTest {
         PageObject.setBrowser(browser);
 
         Login login = Login.visit();
-        login.getUserName().sendKeys("standard_user");
+        login.getUsername().sendKeys("standard_user");
 
-        Assert.assertEquals("standard_user", login.getUserName().getValue());
+        Assert.assertEquals("standard_user", login.getUsername().getValue());
     }
 
     @Test
