@@ -1,5 +1,6 @@
-package com.saucelabs.framework;
+package com.saucelabs.framework.tests;
 
+import com.saucelabs.framework.Browser;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;

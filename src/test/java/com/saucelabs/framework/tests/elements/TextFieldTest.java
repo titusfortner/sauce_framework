@@ -1,6 +1,7 @@
-package com.saucelabs.framework.elements;
+package com.saucelabs.framework.tests.elements;
 
-import com.saucelabs.framework.BaseTest;
+import com.saucelabs.framework.elements.TextField;
+import com.saucelabs.framework.tests.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;

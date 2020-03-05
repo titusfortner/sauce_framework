@@ -1,12 +1,10 @@
-package com.saucelabs.framework.elements;
+package com.saucelabs.framework.tests.elements;
 
-import com.saucelabs.framework.BaseTest;
 import com.saucelabs.framework.elements.HTMLElement;
+import com.saucelabs.framework.tests.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class CreationTest extends BaseTest {
     @Test

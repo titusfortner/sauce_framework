@@ -1,4 +1,4 @@
-package com.saucelabs.framework;
+package com.saucelabs.framework.tests;
 
 import com.saucelabs.framework.elements.HTMLElement;
 import org.junit.Assert;
@@ -27,14 +27,14 @@ public class SynchronizationTest extends BaseTest {
 
     @Test
     public void doesNotWaitForFoundElement() {
-        System.setProperty("automatic.wait", "1");
+        System.setProperty("automatic.wait", "5");
         browser.get("https://www.saucedemo.com");
 
         HTMLElement htmlElement = browser.element(By.className("btn_action"));
         long beforeTime = System.currentTimeMillis();
         htmlElement.click();
         long ms = System.currentTimeMillis() - beforeTime;
-        Assert.assertTrue(ms < 1000);
+        Assert.assertTrue(ms < 5000);
     }
 
 }
