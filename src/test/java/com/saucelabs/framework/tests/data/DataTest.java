@@ -4,6 +4,9 @@ import com.saucelabs.framework.data.User;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashSet;
+
+
 public class DataTest {
     @Test
     public void createsNewDataObject() {
@@ -11,7 +14,6 @@ public class DataTest {
 
         Assert.assertEquals(String.class, user.getUsername().getClass());
         Assert.assertEquals(String.class, user.getPassword().getClass());
-        Assert.assertEquals(Boolean.class, user.getSubmit().getClass());
     }
 
     @Test
@@ -20,6 +22,24 @@ public class DataTest {
 
         Assert.assertEquals("standard_user", user.getUsername());
         Assert.assertEquals("secret_sauce", user.getPassword());
-        Assert.assertTrue(user.getSubmit());
+    }
+
+    @Test
+    public void createsKeySet() {
+        HashSet<String> hashSet = new HashSet<>();
+        hashSet.add("username");
+        hashSet.add("password");
+
+        User user = new User();
+        Assert.assertEquals(hashSet, user.getKeys());
+    }
+
+    @Test
+    public void getsValue() {
+        User user = new User();
+        user.setUsername("foo");
+
+        String value = (String) user.getValue("username");
+        Assert.assertEquals("foo", value);
     }
 }

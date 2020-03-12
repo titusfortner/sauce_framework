@@ -7,7 +7,6 @@ import lombok.Setter;
 public class User extends DataObject {
     private String username = faker.name().username();
     private String password = faker.internet().password();
-    private Boolean submit = true;
 
     public static User valid() {
         User user = new User();
