@@ -1,7 +1,7 @@
 package com.saucelabs.framework;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import lombok.Getter;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,16 +12,15 @@ import java.net.URL;
 
 public class PlatformFactory {
 
-    @Getter
-    RemoteWebDriver driver;
     private String username = System.getenv("SAUCE_USERNAME");
     private String accessKey = System.getenv("SAUCE_ACCESS_KEY");
+    private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public PlatformFactory(String platform) {
         System.setProperty("wdm.targetPath", "lib/drivers/auto/");
         if (platform.equals("firefox")) {
             WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver();
+            driver.set(new FirefoxDriver());
         } else if (platform.equals("sauce")) {
             URL url = null;
             try {
@@ -32,10 +31,14 @@ public class PlatformFactory {
             ChromeOptions browserOptions = new ChromeOptions();
             browserOptions.setCapability("platformName", "Windows 10");
             browserOptions.setCapability("browserVersion", "latest");
-            driver = new RemoteWebDriver(url, browserOptions);
+            driver.set(new RemoteWebDriver(url, browserOptions));
         } else {
             WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            driver.set(new ChromeDriver());
         }
+    }
+
+    public WebDriver getDriver() {
+        return driver.get();
     }
 }
