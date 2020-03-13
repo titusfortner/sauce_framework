@@ -8,11 +8,11 @@ import org.openqa.selenium.By;
 
 
 public class Login extends PageObject {
-    @Getter public String url = "https://www.saucedemo.com/";
-    @Getter private HTMLElement form = new HTMLElement(browser, By.tagName("form"));
-    @Getter private TextField username = new TextField(form, By.cssSelector(":first-child"));
-    @Getter private TextField password = new TextField(browser, By.id("password"));
-    @Getter private HTMLElement submit = new HTMLElement(browser, By.className("btn_action"));
+    public String url = "https://www.saucedemo.com/";
+    @Getter protected HTMLElement form = new HTMLElement(browser, By.tagName("form"));
+    @Getter protected TextField username = new TextField(form, By.cssSelector(":first-child"));
+    @Getter protected TextField password = new TextField(browser, By.id("password"));
+    @Getter protected HTMLElement submit = new HTMLElement(browser, By.className("btn_action"));
 
     public static Login visit() {
         Login login = new Login();
