@@ -20,8 +20,7 @@ public class Login extends PageObject {
     }
 
     public void login(User valid) {
-        username.sendKeys(valid.getUsername());
-        password.sendKeys(valid.getPassword());
+        fillForm(valid);
         submit.click();
     }
 }
