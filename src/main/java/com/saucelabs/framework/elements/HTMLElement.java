@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 
 @Getter
 public class HTMLElement {
+    private HTMLElement scope;
     private By locator;
     private Browser browser;
     private WebElement element;
@@ -18,6 +19,11 @@ public class HTMLElement {
         this.browser = browser;
         this.locator = locator;
         this.synchronizer = new Synchronizer();
+    }
+
+    public HTMLElement(HTMLElement element, By locator) {
+        this(element.getBrowser(), locator);
+        this.scope = element;
     }
 
     //
@@ -81,7 +87,13 @@ public class HTMLElement {
 
     void locate() {
         if (this.element == null) {
-            this.element = browser.getDriver().findElement(locator);
+            if (this.scope == null) {
+                this.element = browser.getDriver().findElement(locator);
+            } else {
+                scope.locate();
+                WebElement parent = scope.getElement();
+                this.element = parent.findElement(locator);
+            }
         }
     }
 

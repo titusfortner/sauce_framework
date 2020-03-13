@@ -9,6 +9,10 @@ public class TextField extends HTMLElement {
         super(browser, locator);
     }
 
+    public TextField(HTMLElement element, By locator) {
+        super(element, locator);
+    }
+
     public void set(String text) {
         clear();
         sendKeys(text);

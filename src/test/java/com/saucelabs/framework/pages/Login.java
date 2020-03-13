@@ -9,7 +9,8 @@ import org.openqa.selenium.By;
 
 public class Login extends PageObject {
     @Getter public String url = "https://www.saucedemo.com/";
-    @Getter private TextField username = new TextField(browser, By.id("user-name"));
+    @Getter private HTMLElement form = new HTMLElement(browser, By.tagName("form"));
+    @Getter private TextField username = new TextField(form, By.cssSelector(":first-child"));
     @Getter private TextField password = new TextField(browser, By.id("password"));
     @Getter private HTMLElement submit = new HTMLElement(browser, By.className("btn_action"));
 
