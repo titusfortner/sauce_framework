@@ -59,6 +59,22 @@ public class HTMLElement {
         return getAttribute("value");
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof HTMLElement)) {
+            return false;
+        } else {
+            try {
+                HTMLElement c = (HTMLElement) o;
+                return c.getLocator().equals(locator);
+            } catch (ClassCastException e) {
+                return false;
+            }
+        }
+    }
+
     //
     // RESTRICTED METHODS
     //

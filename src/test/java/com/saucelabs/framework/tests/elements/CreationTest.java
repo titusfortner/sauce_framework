@@ -9,6 +9,13 @@ import org.openqa.selenium.By;
 public class CreationTest extends BaseTest {
     @Test
     public void createsElementFromLocator() {
+        HTMLElement htmlElement = new HTMLElement(browser, By.id("foo"));
+
+        Assert.assertEquals("org.openqa.selenium.By$ById", htmlElement.getLocator().getClass().getName());
+    }
+
+    @Test
+    public void createsElementFromBrowser() {
         HTMLElement htmlElement = browser.element(By.id("foo"));
 
         Assert.assertEquals("org.openqa.selenium.By$ById", htmlElement.getLocator().getClass().getName());
@@ -20,6 +27,4 @@ public class CreationTest extends BaseTest {
 
         Assert.assertNull(htmlElement.getElement());
     }
-
-
 }
