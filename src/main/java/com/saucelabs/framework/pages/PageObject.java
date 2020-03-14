@@ -13,13 +13,46 @@ import java.util.Set;
 
 public abstract class PageObject {
     @Setter public static Browser browser;
-    @Getter public String url;
     @Getter private Set<String> elements = new HashSet<>();
+    OnPage required;
 
     public PageObject() {
+        required = (OnPage) this.getClass().getAnnotation(OnPage.class);
         for (Field field : this.getClass().getDeclaredFields()) {
             if (HTMLElement.class.isAssignableFrom(field.getType())) {
                 elements.add(field.getName());
+            }
+        }
+    }
+
+    public void visit() {
+        if (!required.url().isEmpty()) {
+            browser.get(required.url());
+        }
+    }
+
+    public boolean isOnPage() {
+        if (!required.url().isEmpty() && !browser.getCurrentUrl().equals(required.url())) {
+            return false;
+        }
+        if (!required.title().isEmpty() && !browser.getTitle().equals(required.title())) {
+            return false;
+        }
+        for (String element : required.elements()) {
+            HTMLElement htmlElement = (HTMLElement) getValue(element);
+            if (!htmlElement.doesExist()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void fillForm(DataObject data) {
+        Set<String> keys = data.getKeys();
+
+        for (String key : elements) {
+            if (keys.contains(key)) {
+                setValue((HTMLElement) getValue(key), data.getValue(key));
             }
         }
     }
@@ -31,20 +64,6 @@ public abstract class PageObject {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public boolean isOnPage() {
-        return browser.getCurrentUrl().equals(getUrl());
-    }
-
-    public void fillForm(DataObject data) {
-        Set<String> keys = data.getKeys();
-
-        for (String key : elements) {
-            if (keys.contains(key)) {
-                setValue((HTMLElement) getValue(key), data.getValue(key));
-            }
-        }
     }
 
     public void setValue(HTMLElement el, Object value) {
