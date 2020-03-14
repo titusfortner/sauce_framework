@@ -11,7 +11,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class PlatformFactory {
-
     private String username = System.getenv("SAUCE_USERNAME");
     private String accessKey = System.getenv("SAUCE_ACCESS_KEY");
     private ThreadLocal<WebDriver> driver = new ThreadLocal<>();

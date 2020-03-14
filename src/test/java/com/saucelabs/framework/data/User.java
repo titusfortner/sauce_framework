@@ -14,5 +14,4 @@ public class User extends DataObject {
         user.password = "secret_sauce";
         return user;
     }
-
 }

@@ -14,7 +14,6 @@ public class HTMLElement {
     private WebElement element;
     Synchronizer synchronizer;
 
-
     public HTMLElement(Browser browser, By locator) {
         this.browser = browser;
         this.locator = locator;

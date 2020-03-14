@@ -4,7 +4,6 @@ import com.saucelabs.framework.Browser;
 import org.openqa.selenium.By;
 
 public class TextField extends HTMLElement {
-
     public TextField(Browser browser, By locator) {
         super(browser, locator);
     }

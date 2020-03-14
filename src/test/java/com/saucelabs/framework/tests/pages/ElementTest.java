@@ -19,6 +19,7 @@ public class ElementTest extends BaseTest {
         hashSet.add("username");
         hashSet.add("password");
         hashSet.add("submit");
+        hashSet.add("form");
 
         Login login = new Login();
         Assert.assertEquals(hashSet, login.getElements());
@@ -27,9 +28,9 @@ public class ElementTest extends BaseTest {
     @Test
     public void getsValue() {
         Login login = new Login();
-        HTMLElement username = new TextField(browser, By.id("username"));
+        TextField username = new TextField(browser, By.id("password"));
 
-        HTMLElement value = (HTMLElement) login.getValue("username");
+        TextField value = (TextField) login.getValue("password");
         Assert.assertEquals(username, value);
     }
 
@@ -37,27 +38,29 @@ public class ElementTest extends BaseTest {
     public void locatesElements() {
         PageObject.setBrowser(browser);
 
-        Login login = Login.visit();
-        Assert.assertEquals(HTMLElement.class, login.getSubmit().getClass());
-        Assert.assertTrue(login.getSubmit().doesExist());
+        Login.visit();
+        HTMLElement submit = new HTMLElement(browser, By.className("btn_action"));
+        Assert.assertTrue(submit.doesExist());
     }
 
     @Test
     public void locatesTextField() {
         PageObject.setBrowser(browser);
 
-        Login login = Login.visit();
-        Assert.assertEquals(TextField.class, login.getUsername().getClass());
-        Assert.assertTrue(login.getUsername().doesExist());
+        Login.visit();
+        TextField username = new TextField(browser, By.id("user-name"));
+
+        Assert.assertTrue(username.doesExist());
     }
 
     @Test
     public void actsOnElements() {
         PageObject.setBrowser(browser);
 
-        Login login = Login.visit();
-        login.getUsername().sendKeys("standard_user");
+        Login.visit();
+        TextField username = new TextField(browser, By.id("user-name"));
+        username.sendKeys("standard_user");
 
-        Assert.assertEquals("standard_user", login.getUsername().getValue());
+        Assert.assertEquals("standard_user", username.getValue());
     }
 }
