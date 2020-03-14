@@ -37,8 +37,7 @@ public class ElementTest extends BaseTest {
     @Test
     public void locatesElements() {
         PageObject.setBrowser(browser);
-
-        Login.visit();
+        (new Login()).visit();
         HTMLElement submit = new HTMLElement(browser, By.className("btn_action"));
         Assert.assertTrue(submit.doesExist());
     }
@@ -47,7 +46,7 @@ public class ElementTest extends BaseTest {
     public void locatesTextField() {
         PageObject.setBrowser(browser);
 
-        Login.visit();
+        (new Login()).visit();
         TextField username = new TextField(browser, By.id("user-name"));
 
         Assert.assertTrue(username.doesExist());
@@ -57,7 +56,7 @@ public class ElementTest extends BaseTest {
     public void actsOnElements() {
         PageObject.setBrowser(browser);
 
-        Login.visit();
+        (new Login()).visit();
         TextField username = new TextField(browser, By.id("user-name"));
         username.sendKeys("standard_user");
 

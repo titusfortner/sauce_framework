@@ -12,7 +12,8 @@ public class DataTest extends BaseTest {
     public void methodActsOnElements() {
         PageObject.setBrowser(browser);
 
-        Login login = Login.visit();
+        Login login = new Login();
+        login.visit();
         login.login(User.valid());
 
         Assert.assertFalse(login.isOnPage());

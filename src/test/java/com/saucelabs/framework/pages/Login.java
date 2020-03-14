@@ -14,14 +14,12 @@ public class Login extends PageObject {
     protected TextField password = new TextField(browser, By.id("password"));
     protected HTMLElement submit = new HTMLElement(browser, By.className("btn_action"));
 
-    public static Login visit() {
-        Login login = new Login();
-        browser.get(login.url);
-        return login;
+    public void visit() {
+        browser.get(url);
     }
 
-    public void login(User valid) {
-        fillForm(valid);
+    public void login(User user) {
+        fillForm(user);
         submit.click();
     }
 }

@@ -11,7 +11,8 @@ public class NavigationTest extends BaseTest {
     public void navigates() {
         PageObject.setBrowser(browser);
 
-        Login login = Login.visit();
+        Login login = new Login();
+        login.visit();
         Assert.assertTrue(login.isOnPage());
     }
 
