@@ -12,7 +12,7 @@ public class LocationTest extends BaseTest {
     public void locatesElementFromAction() {
         browser.get("https://www.saucedemo.com");
 
-        HTMLElement htmlElement = browser.element(By.id("user-name"));
+        HTMLElement htmlElement = new HTMLElement(browser, By.id("user-name"));
 
         htmlElement.click();
 

@@ -11,7 +11,7 @@ public class ActionTest extends BaseTest {
     public void clicksElement() {
         browser.get("https://www.saucedemo.com");
 
-        HTMLElement htmlElement = browser.element(By.className("btn_action"));
+        HTMLElement htmlElement = new HTMLElement(browser, By.className("btn_action"));
         htmlElement.click();
 
         Assert.assertTrue(browser.getPageSource().contains("Epic sadface"));
