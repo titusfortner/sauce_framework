@@ -11,7 +11,7 @@ public class TextFieldTest extends BaseTest {
     public void sendKeys() {
         browser.get("https://www.saucedemo.com");
 
-        TextField textField = browser.textField(By.id("user-name"));
+        TextField textField = new TextField(browser, By.id("user-name"));
 
         textField.sendKeys("Foo");
 
@@ -22,7 +22,7 @@ public class TextFieldTest extends BaseTest {
     public void set() {
         browser.get("https://www.saucedemo.com");
 
-        TextField textField = browser.textField(By.id("user-name"));
+        TextField textField = new TextField(browser, By.id("user-name"));
 
         textField.sendKeys("Bar");
         textField.set("Foo");
@@ -34,7 +34,7 @@ public class TextFieldTest extends BaseTest {
     public void clear() {
         browser.get("https://www.saucedemo.com");
 
-        TextField textField = browser.textField(By.id("user-name"));
+        TextField textField = new TextField(browser, By.id("user-name"));
 
         textField.sendKeys("Bar");
         textField.clear();
