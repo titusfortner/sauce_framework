@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public abstract class DataObject {
-    static Faker faker = new Faker();
+    public static Faker faker = new Faker();
     @Getter private Set<String> keys = new HashSet<>();
 
     public DataObject() {
