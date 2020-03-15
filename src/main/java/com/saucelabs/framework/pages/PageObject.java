@@ -2,7 +2,7 @@ package com.saucelabs.framework.pages;
 
 import com.saucelabs.framework.Browser;
 import com.saucelabs.framework.data.DataObject;
-import com.saucelabs.framework.elements.HTMLElement;
+import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.elements.TextField;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +20,7 @@ public abstract class PageObject {
     public PageObject() {
         required = (OnPage) this.getClass().getAnnotation(OnPage.class);
         for (Field field : this.getClass().getDeclaredFields()) {
-            if (HTMLElement.class.isAssignableFrom(field.getType())) {
+            if (Element.class.isAssignableFrom(field.getType())) {
                 elements.add(field.getName());
             }
         }
@@ -49,7 +49,7 @@ public abstract class PageObject {
             return false;
         }
         for (String element : required.elements()) {
-            HTMLElement htmlElement = (HTMLElement) getValue(element);
+            Element htmlElement = (Element) getValue(element);
             if (!htmlElement.doesExist()) {
                 return false;
             }
@@ -62,7 +62,7 @@ public abstract class PageObject {
 
         for (String key : elements) {
             if (keys.contains(key)) {
-                setValue((HTMLElement) getValue(key), data.getValue(key));
+                setValue((Element) getValue(key), data.getValue(key));
             }
         }
     }
@@ -78,7 +78,7 @@ public abstract class PageObject {
         return null;
     }
 
-    public void setValue(HTMLElement el, Object value) {
+    public void setValue(Element el, Object value) {
         if (el.getClass().equals(TextField.class)) {
             ((TextField) el).set((String) value);
         }

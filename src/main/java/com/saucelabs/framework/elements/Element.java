@@ -7,20 +7,20 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 @Getter
-public class HTMLElement {
-    private HTMLElement scope;
+public class Element {
+    private Element scope;
     private By locator;
     private Browser browser;
     private WebElement element;
     Synchronizer synchronizer;
 
-    public HTMLElement(Browser browser, By locator) {
+    public Element(Browser browser, By locator) {
         this.browser = browser;
         this.locator = locator;
         this.synchronizer = new Synchronizer();
     }
 
-    public HTMLElement(HTMLElement element, By locator) {
+    public Element(Element element, By locator) {
         this(element.getBrowser(), locator);
         this.scope = element;
     }
@@ -68,11 +68,11 @@ public class HTMLElement {
     public boolean equals(Object o) {
         if (o == this) {
             return true;
-        } else if (!(o instanceof HTMLElement)) {
+        } else if (!(o instanceof Element)) {
             return false;
         } else {
             try {
-                HTMLElement c = (HTMLElement) o;
+                Element c = (Element) o;
                 return c.getLocator().equals(locator);
             } catch (ClassCastException e) {
                 return false;

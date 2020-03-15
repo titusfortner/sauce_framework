@@ -3,12 +3,12 @@ package com.saucelabs.framework.elements;
 import com.saucelabs.framework.Browser;
 import org.openqa.selenium.By;
 
-public class TextField extends HTMLElement {
+public class TextField extends Element {
     public TextField(Browser browser, By locator) {
         super(browser, locator);
     }
 
-    public TextField(HTMLElement element, By locator) {
+    public TextField(Element element, By locator) {
         super(element, locator);
     }
 
