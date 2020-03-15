@@ -1,9 +1,12 @@
 package com.saucelabs.framework.elements;
 
+import lombok.SneakyThrows;
 import org.awaitility.core.ConditionTimeoutException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
+
+import java.util.concurrent.Callable;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
@@ -34,6 +37,24 @@ class Synchronizer {
             } catch (StaleElementReferenceException ignored) {
             }
         } while (true);
+    }
+
+    @SneakyThrows
+    String text(Element element, Callable<String> block) {
+        do {
+            try {
+                element.locate();
+                return block.call();
+            } catch (NoSuchElementException e) {
+                waitUntilExists(element);
+                break;
+            } catch (ElementNotVisibleException e) {
+                waitUntilVisible(element);
+                break;
+            } catch (StaleElementReferenceException ignored) {
+            }
+        } while (true);
+        return null;
     }
 
     private static Integer desiredWait() {

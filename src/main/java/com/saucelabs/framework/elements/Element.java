@@ -56,12 +56,16 @@ public class Element {
     // INFORMATION METHODS
     //
 
-    public String getAttribute(String attribute) {
-        return this.element.getAttribute(attribute);
+    public String getText() {
+        return synchronizer.text(this, () -> getElement().getText());
     }
 
     public String getValue() {
         return getAttribute("value");
+    }
+
+    public String getAttribute(String attribute) {
+        return synchronizer.text(this, () -> getElement().getAttribute(attribute));
     }
 
     @Override
