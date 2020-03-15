@@ -6,6 +6,7 @@ import com.saucelabs.framework.elements.HTMLElement;
 import com.saucelabs.framework.elements.TextField;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
@@ -25,13 +26,22 @@ public abstract class PageObject {
         }
     }
 
+    @SneakyThrows
     public void visit() {
-        if (!required.url().isEmpty()) {
-            browser.get(required.url());
+        try {
+            if (!required.url().isEmpty()) {
+                browser.get(required.url());
+            }
+        } catch (NullPointerException ex) {
+            throw new Exception("Unable to visit as URL is not defined in Page Object " + this.getClass());
         }
     }
 
+    @SneakyThrows
     public boolean isOnPage() {
+        if (required == null) {
+            throw new Exception("No means were provided to check if on page forPage Object " + this.getClass());
+        }
         if (!required.url().isEmpty() && !browser.getCurrentUrl().equals(required.url())) {
             return false;
         }
