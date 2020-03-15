@@ -1,6 +1,6 @@
 package com.saucelabs.framework.tests.elements;
 
-import com.saucelabs.framework.elements.HTMLElement;
+import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.tests.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,10 +12,10 @@ public class LocationTest extends BaseTest {
     public void locatesElementFromAction() {
         browser.get("https://www.saucedemo.com");
 
-        HTMLElement htmlElement = new HTMLElement(browser, By.id("user-name"));
+        Element element = new Element(browser, By.id("user-name"));
 
-        htmlElement.click();
+        element.click();
 
-        Assert.assertEquals(RemoteWebElement.class, htmlElement.getElement().getClass());
+        Assert.assertEquals(RemoteWebElement.class, element.getElement().getClass());
     }
 }

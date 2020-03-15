@@ -1,6 +1,6 @@
 package com.saucelabs.framework.tests.pages;
 
-import com.saucelabs.framework.elements.HTMLElement;
+import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.elements.TextField;
 import com.saucelabs.framework.pages.Login;
 import com.saucelabs.framework.pages.PageObject;
@@ -38,7 +38,7 @@ public class ElementTest extends BaseTest {
     public void locatesElements() {
         PageObject.setBrowser(browser);
         (new Login()).visit();
-        HTMLElement submit = new HTMLElement(browser, By.className("btn_action"));
+        Element submit = new Element(browser, By.className("btn_action"));
         Assert.assertTrue(submit.doesExist());
     }
 

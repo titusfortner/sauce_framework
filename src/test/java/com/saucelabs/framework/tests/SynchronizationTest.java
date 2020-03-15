@@ -1,6 +1,6 @@
 package com.saucelabs.framework.tests;
 
-import com.saucelabs.framework.elements.HTMLElement;
+import com.saucelabs.framework.elements.Element;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -14,10 +14,10 @@ public class SynchronizationTest extends BaseTest {
         System.setProperty("automatic.wait", "1");
         browser.get("https://www.saucedemo.com");
 
-        HTMLElement htmlElement = new HTMLElement(browser, By.id("not_there"));
+        Element element = new Element(browser, By.id("not_there"));
         long beforeTime = System.currentTimeMillis();
         try {
-            htmlElement.click();
+            element.click();
             fail();
         } catch (NoSuchElementException e) {
             long ms = System.currentTimeMillis() - beforeTime;
@@ -30,9 +30,9 @@ public class SynchronizationTest extends BaseTest {
         System.setProperty("automatic.wait", "5");
         browser.get("https://www.saucedemo.com");
 
-        HTMLElement htmlElement = new HTMLElement(browser, By.className("btn_action"));
+        Element element = new Element(browser, By.className("btn_action"));
         long beforeTime = System.currentTimeMillis();
-        htmlElement.click();
+        element.click();
         long ms = System.currentTimeMillis() - beforeTime;
         Assert.assertTrue(ms < 5000);
     }

@@ -1,6 +1,6 @@
 package com.saucelabs.framework.tests.elements;
 
-import com.saucelabs.framework.elements.HTMLElement;
+import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.tests.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,8 +11,8 @@ public class ActionTest extends BaseTest {
     public void clicksElement() {
         browser.get("https://www.saucedemo.com");
 
-        HTMLElement htmlElement = new HTMLElement(browser, By.className("btn_action"));
-        htmlElement.click();
+        Element element = new Element(browser, By.className("btn_action"));
+        element.click();
 
         Assert.assertTrue(browser.getPageSource().contains("Epic sadface"));
     }
