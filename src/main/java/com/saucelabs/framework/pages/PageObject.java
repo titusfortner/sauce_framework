@@ -69,7 +69,9 @@ public abstract class PageObject {
 
     public Object getValue(String key) {
         try {
-            return this.getClass().getDeclaredField(key).get(this);
+            Field declaredField = this.getClass().getDeclaredField(key);
+            declaredField.setAccessible(true);
+            return declaredField.get(this);
         } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
         }
