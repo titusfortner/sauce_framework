@@ -103,4 +103,12 @@ public class Element {
     void reset() {
         this.element = null;
     }
+
+    public TextField textField(By locator) {
+        return new TextField(this, locator);
+    }
+
+    public Element element(By locator) {
+        return new Element(this, locator);
+    }
 }

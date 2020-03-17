@@ -9,13 +9,13 @@ import java.util.regex.Pattern;
 
 public class ShowAddressPage extends BasePage {
 
-    protected Element notice = new Element(browser, By.cssSelector("[data-test=notice]"));
-    protected Element firstName = new Element(browser, By.cssSelector("[data-test=first_name]"));
-    protected Element lastName = new Element(browser, By.cssSelector("[data-test=last_name]"));
-    protected Element streetAddress = new Element(browser, By.cssSelector("[data-test=street_address]"));
-    protected Element secondaryAddress = new Element(browser, By.cssSelector("[data-test=secondary_address]"));
-    protected Element city = new Element(browser, By.cssSelector("[data-test=city]"));
-    protected Element zipCode = new Element(browser, By.cssSelector("[data-test=zip_code]"));
+    private Element notice = browser.element(By.cssSelector("[data-test=notice]"));
+    private Element firstName = browser.element(By.cssSelector("[data-test=first_name]"));
+    private Element lastName = browser.element(By.cssSelector("[data-test=last_name]"));
+    private Element streetAddress = browser.element(By.cssSelector("[data-test=street_address]"));
+    private Element secondaryAddress = browser.element(By.cssSelector("[data-test=secondary_address]"));
+    private Element city = browser.element(By.cssSelector("[data-test=city]"));
+    private Element zipCode = browser.element(By.cssSelector("[data-test=zip_code]"));
 
     public boolean hasSuccessMessage() {
         return isOnPage() && notice.isVisible();

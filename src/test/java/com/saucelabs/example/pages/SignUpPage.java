@@ -9,9 +9,9 @@ import org.openqa.selenium.By;
 @OnPage(path="/sign_up")
 public class SignUpPage extends BasePage {
 
-    protected TextField email = new TextField(browser, By.id("user_email"));
-    protected TextField password = new TextField(browser, By.id("user_password"));
-    protected Element submit = new Element(browser, By.cssSelector("[data-test=submit]"));
+    private TextField email = browser.textField(By.id("user_email"));
+    private TextField password = browser.textField(By.id("user_password"));
+    private Element submit = browser.element(By.cssSelector("[data-test=submit]"));
 
     public void signUp(UserData userData) {
         fillForm(userData);

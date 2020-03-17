@@ -11,7 +11,7 @@ public class PredicateTest extends BaseTest {
     public void elementExists() {
         browser.get("https://www.saucedemo.com");
 
-        Element element = new Element(browser, By.className("btn_action"));
+        Element element = browser.element(By.className("btn_action"));
 
         Assert.assertTrue(element.doesExist());
     }
@@ -20,7 +20,7 @@ public class PredicateTest extends BaseTest {
     public void elementDoesNotExist() {
         browser.get("https://www.saucedemo.com");
 
-        Element element = new Element(browser, By.className("not_there"));
+        Element element = browser.element(By.className("not_there"));
 
         Assert.assertFalse(element.doesExist());
     }
@@ -29,7 +29,7 @@ public class PredicateTest extends BaseTest {
     public void elementIsVisible() {
         browser.get("https://www.saucedemo.com");
 
-        Element element = new Element(browser, By.className("btn_action"));
+        Element element = browser.element(By.className("btn_action"));
 
         Assert.assertTrue(element.isVisible());
     }
@@ -38,7 +38,7 @@ public class PredicateTest extends BaseTest {
     public void elementIsNotVisible() {
         browser.get("http://watir.com/examples/forms_with_input_elements.html");
 
-        Element element = new Element(browser, By.id("wants_newsletter"));
+        Element element = browser.element(By.id("wants_newsletter"));
 
         Assert.assertFalse(element.isVisible());
     }
@@ -47,7 +47,7 @@ public class PredicateTest extends BaseTest {
     public void nonExistentElementNotVisible() {
         browser.get("https://www.saucedemo.com");
 
-        Element element = new Element(browser, By.className("not_there"));
+        Element element = browser.element(By.className("not_there"));
 
         Assert.assertFalse(element.isVisible());
     }

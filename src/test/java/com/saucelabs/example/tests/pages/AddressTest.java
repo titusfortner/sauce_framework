@@ -1,7 +1,8 @@
-package com.saucelabs.example.tests;
+package com.saucelabs.example.tests.pages;
 
 import com.saucelabs.example.data.AddressData;
 import com.saucelabs.example.pages.*;
+import com.saucelabs.example.tests.BaseTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

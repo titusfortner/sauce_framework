@@ -9,21 +9,21 @@ import org.openqa.selenium.By;
 public class CreationTest extends BaseTest {
     @Test
     public void createsElementFromLocator() {
-        Element element = new Element(browser, By.id("foo"));
+        Element element = browser.element(By.id("foo"));
 
         Assert.assertEquals("org.openqa.selenium.By$ById", element.getLocator().getClass().getName());
     }
 
     @Test
     public void createsElementFromBrowser() {
-        Element element = new Element(browser, By.id("foo"));
+        Element element = browser.element(By.id("foo"));
 
         Assert.assertEquals("org.openqa.selenium.By$ById", element.getLocator().getClass().getName());
     }
 
     @Test
     public void elementNullBeforeLocate() {
-        Element element = new Element(browser, By.id("foo"));
+        Element element = browser.element(By.id("foo"));
 
         Assert.assertNull(element.getElement());
     }

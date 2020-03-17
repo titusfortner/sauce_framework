@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 
 public class HeaderSection extends BasePage {
 
-    protected Element logOut = new Element(browser, By.cssSelector("[data-test=sign-out]"));
-    protected Element currentUser = new Element(browser, By.cssSelector("[data-test=current-user]"));
+    private Element logOut = browser.element(By.cssSelector("[data-test=sign-out]"));
+    private Element currentUser = browser.element(By.cssSelector("[data-test=current-user]"));
 
     public void logOut() {
         logOut.click();

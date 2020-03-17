@@ -14,7 +14,7 @@ public class SynchronizationTest extends BaseTest {
         System.setProperty("automatic.wait", "1");
         browser.get("https://www.saucedemo.com");
 
-        Element element = new Element(browser, By.id("not_there"));
+        Element element = browser.element(By.id("not_there"));
         long beforeTime = System.currentTimeMillis();
         try {
             element.click();
@@ -30,7 +30,7 @@ public class SynchronizationTest extends BaseTest {
         System.setProperty("automatic.wait", "5");
         browser.get("https://www.saucedemo.com");
 
-        Element element = new Element(browser, By.className("btn_action"));
+        Element element = browser.element(By.className("btn_action"));
         long beforeTime = System.currentTimeMillis();
         element.click();
         long ms = System.currentTimeMillis() - beforeTime;

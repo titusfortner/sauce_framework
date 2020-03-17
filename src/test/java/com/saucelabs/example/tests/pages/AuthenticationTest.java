@@ -1,10 +1,11 @@
-package com.saucelabs.example.tests;
+package com.saucelabs.example.tests.pages;
 
 import com.saucelabs.example.data.UserData;
 import com.saucelabs.example.pages.HeaderSection;
 import com.saucelabs.example.pages.HomePage;
 import com.saucelabs.example.pages.LogInPage;
 import com.saucelabs.example.pages.SignUpPage;
+import com.saucelabs.example.tests.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 
