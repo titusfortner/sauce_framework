@@ -1,12 +1,13 @@
 package com.saucelabs.example.pages;
 
-import com.saucelabs.example.data.Address;
+import com.saucelabs.example.data.AddressData;
 import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.elements.TextField;
 import com.saucelabs.framework.pages.PageObject;
 import org.openqa.selenium.By;
 
-public class EditAddress extends PageObject {
+public class EditAddressPage extends PageObject {
+
     protected TextField firstName = new TextField(browser, By.id("address_first_name"));
     protected TextField lastName = new TextField(browser, By.id("address_last_name"));
     protected TextField streetAddress = new TextField(browser, By.id("address_street_address"));
@@ -16,11 +17,15 @@ public class EditAddress extends PageObject {
     protected Element submit = new Element(browser, By.name("commit"));
 
     public void visit(String id) {
-        browser.get("http://a.testaddressbook.com/addresses/" + id + "/edit");
+        browser.get("https://address-book-example.herokuapp.com/addresses/" + id + "/edit");
     }
 
-    public void editAddress(Address address) {
+    public void editAddress(AddressData address) {
         fillForm(address);
         submit.click();
+    }
+
+    public void visit(AddressData addressData) {
+        visit(addressData.getId());
     }
 }

@@ -1,6 +1,6 @@
 package com.saucelabs.example.tests;
 
-import com.saucelabs.example.data.Address;
+import com.saucelabs.example.data.AddressData;
 import com.saucelabs.example.pages.*;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,84 +9,84 @@ import org.junit.Test;
 public class AddressTest extends BaseTest {
     @Before
     public void signUp() {
-        SignUp signUp = new SignUp();
-        signUp.visit();
-        signUp.signUp();
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.visit();
+        signUpPage.signUp();
     }
 
     @Test
     public void creates() {
-        NewAddress newAddress = new NewAddress();
-        newAddress.visit();
+        NewAddressPage newAddressPage = new NewAddressPage();
+        newAddressPage.visit();
 
-        Address address = new Address();
-        newAddress.createAddress(address);
+        AddressData address = new AddressData();
+        newAddressPage.createAddress(address);
 
-        ShowAddress showAddress = new ShowAddress();
+        ShowAddressPage showAddressPage = new ShowAddressPage();
 
-        Assert.assertTrue(showAddress.hasSuccessMessage());
+        Assert.assertTrue(showAddressPage.hasSuccessMessage());
     }
 
     @Test
     public void shows() {
-        NewAddress newAddress = new NewAddress();
-        newAddress.visit();
-        Address address = new Address();
-        newAddress.createAddress(address);
+        NewAddressPage newAddressPage = new NewAddressPage();
+        newAddressPage.visit();
+        AddressData address = new AddressData();
+        newAddressPage.createAddress(address);
 
-        ShowAddress showAddress = new ShowAddress();
+        ShowAddressPage showAddressPage = new ShowAddressPage();
 
-        Assert.assertTrue(showAddress.isAddress(address));
+        Assert.assertTrue(showAddressPage.isAddress(address));
     }
 
     @Test
     public void lists() {
-        NewAddress newAddress = new NewAddress();
-        newAddress.visit();
-        Address address = new Address();
-        newAddress.createAddress(address);
-        ShowAddress showAddress = new ShowAddress();
-        String id = showAddress.getID();
-        ListAddress listAddress = new ListAddress();
-        listAddress.visit();
+        NewAddressPage newAddressPage = new NewAddressPage();
+        newAddressPage.visit();
+        AddressData address = new AddressData();
+        newAddressPage.createAddress(address);
+        ShowAddressPage showAddressPage = new ShowAddressPage();
+        String id = showAddressPage.getID();
+        ListAddressPage listAddressPage = new ListAddressPage();
+        listAddressPage.visit();
 
-        Assert.assertTrue(listAddress.hasAddress(id));
+        Assert.assertTrue(listAddressPage.hasAddress(id));
     }
 
     @Test
     public void edits() {
-        NewAddress newAddress = new NewAddress();
-        newAddress.visit();
-        Address address = new Address();
-        newAddress.createAddress(address);
-        ShowAddress showAddress = new ShowAddress();
-        String id = showAddress.getID();
+        NewAddressPage newAddressPage = new NewAddressPage();
+        newAddressPage.visit();
+        AddressData address = new AddressData();
+        newAddressPage.createAddress(address);
+        ShowAddressPage showAddressPage = new ShowAddressPage();
+        String id = showAddressPage.getID();
 
-        EditAddress editAddress = new EditAddress();
+        EditAddressPage editAddress = new EditAddressPage();
         editAddress.visit(id);
 
-        Address editedAddress = new Address();
+        AddressData editedAddress = new AddressData();
         editAddress.editAddress(editedAddress);
 
-        Assert.assertTrue(showAddress.hasSuccessMessage());
-        Assert.assertTrue(showAddress.isAddress(editedAddress));
+        Assert.assertTrue(showAddressPage.hasSuccessMessage());
+        Assert.assertTrue(showAddressPage.isAddress(editedAddress));
     }
 
     @Test
     public void deletes() {
-        NewAddress newAddress = new NewAddress();
-        newAddress.visit();
-        Address address = new Address();
-        newAddress.createAddress(address);
-        ShowAddress showAddress = new ShowAddress();
-        String id = showAddress.getID();
+        NewAddressPage newAddressPage = new NewAddressPage();
+        newAddressPage.visit();
+        AddressData address = new AddressData();
+        newAddressPage.createAddress(address);
+        ShowAddressPage showAddressPage = new ShowAddressPage();
+        String id = showAddressPage.getID();
 
-        ListAddress listAddress = new ListAddress();
-        listAddress.visit();
+        ListAddressPage listAddressPage = new ListAddressPage();
+        listAddressPage.visit();
 
-        listAddress.delete(id);
+        listAddressPage.delete(id);
 
-        Assert.assertTrue(listAddress.hasSuccessMessage());
-        Assert.assertFalse(listAddress.hasAddress(id));
+        Assert.assertTrue(listAddressPage.hasSuccessMessage());
+        Assert.assertFalse(listAddressPage.hasAddress(id));
     }
 }

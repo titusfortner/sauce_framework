@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class User extends DataObject {
+public class UserData extends DataObject {
     private String email = faker.internet().emailAddress();
     private String password = faker.internet().password();
 }

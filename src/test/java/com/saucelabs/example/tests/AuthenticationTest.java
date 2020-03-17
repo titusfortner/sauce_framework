@@ -1,20 +1,20 @@
 package com.saucelabs.example.tests;
 
-import com.saucelabs.example.data.User;
-import com.saucelabs.example.pages.Header;
+import com.saucelabs.example.data.UserData;
+import com.saucelabs.example.pages.HeaderSection;
 import com.saucelabs.example.pages.HomePage;
-import com.saucelabs.example.pages.LogIn;
-import com.saucelabs.example.pages.SignUp;
+import com.saucelabs.example.pages.LogInPage;
+import com.saucelabs.example.pages.SignUpPage;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class AuthenticationTest extends BaseTest {
     @Test
     public void signUp() {
-        SignUp signUp = new SignUp();
-        signUp.visit();
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.visit();
 
-        signUp.signUp();
+        signUpPage.signUp();
 
         HomePage homePage = new HomePage();
         Assert.assertTrue(homePage.isOnPage());
@@ -22,30 +22,30 @@ public class AuthenticationTest extends BaseTest {
 
     @Test
     public void logOut() {
-        SignUp signUp = new SignUp();
-        signUp.visit();
-        User user = new User();
-        signUp.signUp(user);
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.visit();
+        UserData userData = new UserData();
+        signUpPage.signUp(userData);
 
-        Header header = new Header();
-        header.logOut();
+        HeaderSection headerSection = new HeaderSection();
+        headerSection.logOut();
 
-        Assert.assertFalse(header.isLoggedIn());
+        Assert.assertFalse(headerSection.isLoggedIn());
     }
 
     @Test
     public void logIn() {
-        SignUp signUp = new SignUp();
-        signUp.visit();
-        User user = new User();
-        signUp.signUp(user);
-        Header header = new Header();
-        header.logOut();
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.visit();
+        UserData userData = new UserData();
+        signUpPage.signUp(userData);
+        HeaderSection headerSection = new HeaderSection();
+        headerSection.logOut();
 
-        LogIn logIn = new LogIn();
-        logIn.visit();
-        logIn.logIn(user);
+        LogInPage logInPage = new LogInPage();
+        logInPage.visit();
+        logInPage.logIn(userData);
 
-        Assert.assertTrue(header.isLoggedIn());
+        Assert.assertTrue(headerSection.isLoggedIn());
     }
 }

@@ -1,6 +1,6 @@
 package com.saucelabs.example.pages;
 
-import com.saucelabs.example.data.Address;
+import com.saucelabs.example.data.AddressData;
 import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.pages.PageObject;
 import org.openqa.selenium.By;
@@ -8,7 +8,8 @@ import org.openqa.selenium.By;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ShowAddress extends PageObject {
+public class ShowAddressPage extends PageObject {
+
     protected Element notice = new Element(browser, By.cssSelector("[data-test=notice]"));
     protected Element firstName = new Element(browser, By.cssSelector("[data-test=first_name]"));
     protected Element lastName = new Element(browser, By.cssSelector("[data-test=last_name]"));
@@ -21,7 +22,7 @@ public class ShowAddress extends PageObject {
         return isOnPage() && notice.isVisible();
     }
 
-    public boolean isAddress(Address address) {
+    public boolean isAddress(AddressData address) {
         return address.getFirstName().equals(firstName.getText()) &&
                 address.getLastName().equals(lastName.getText()) &&
                 address.getStreetAddress().equals(streetAddress.getText()) &&
@@ -43,5 +44,13 @@ public class ShowAddress extends PageObject {
             return matcher.group(1);
         }
         return null;
+    }
+
+    public void visit(String id) {
+        browser.get("https://address-book-example.herokuapp.com/addresses/" + id);
+    }
+
+    public void visit(AddressData addressData) {
+        visit(addressData.getId());
     }
 }

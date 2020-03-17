@@ -1,24 +1,25 @@
 package com.saucelabs.example.pages;
 
-import com.saucelabs.example.data.User;
+import com.saucelabs.example.data.UserData;
 import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.elements.TextField;
 import com.saucelabs.framework.pages.OnPage;
 import com.saucelabs.framework.pages.PageObject;
 import org.openqa.selenium.By;
 
-@OnPage(url="http://a.testaddressbook.com/sign_up")
-public class SignUp extends PageObject {
+@OnPage(url="https://address-book-example.herokuapp.com/sign_up")
+public class SignUpPage extends PageObject {
+
     protected TextField email = new TextField(browser, By.id("user_email"));
     protected TextField password = new TextField(browser, By.id("user_password"));
     protected Element submit = new Element(browser, By.cssSelector("[data-test=submit]"));
 
-    public void signUp(User user) {
-        fillForm(user);
+    public void signUp(UserData userData) {
+        fillForm(userData);
         submit.click();
     }
 
     public void signUp() {
-        signUp(new User());
+        signUp(new UserData());
     }
 }
