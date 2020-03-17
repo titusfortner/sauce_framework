@@ -5,7 +5,6 @@ import com.saucelabs.framework.data.DataObject;
 import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.elements.TextField;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.SneakyThrows;
 import org.openqa.selenium.Cookie;
 
@@ -15,7 +14,8 @@ import java.util.Set;
 
 public abstract class PageObject {
     @Getter private String baseURL;
-    @Getter @Setter protected static Browser browser;
+    private static ThreadLocal<Browser> browserThreadLocal = new ThreadLocal<>();
+    protected Browser browser = getBrowser();
     @Getter private Set<String> elements = new HashSet<>();
     OnPage required;
 
@@ -26,6 +26,14 @@ public abstract class PageObject {
                 elements.add(field.getName());
             }
         }
+    }
+
+    public static Browser getBrowser() {
+        return browserThreadLocal.get();
+    }
+
+    public static void setBrowser(Browser browser) {
+        browserThreadLocal.set(browser);
     }
 
     @SneakyThrows
@@ -109,7 +117,7 @@ public abstract class PageObject {
     }
 
     public void addCookie(Cookie cookie) {
-        getBrowser().manage().addCookie(cookie);
+        browser.manage().addCookie(cookie);
     }
 
     public void addCookie(String key, String value) {
