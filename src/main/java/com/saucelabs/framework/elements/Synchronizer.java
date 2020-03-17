@@ -35,6 +35,7 @@ class Synchronizer {
                 waitUntilVisible(element);
                 break;
             } catch (StaleElementReferenceException ignored) {
+                element.reset();
             }
         } while (true);
     }
