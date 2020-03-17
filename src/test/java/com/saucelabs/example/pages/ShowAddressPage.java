@@ -2,13 +2,12 @@ package com.saucelabs.example.pages;
 
 import com.saucelabs.example.data.AddressData;
 import com.saucelabs.framework.elements.Element;
-import com.saucelabs.framework.pages.PageObject;
 import org.openqa.selenium.By;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ShowAddressPage extends PageObject {
+public class ShowAddressPage extends BasePage {
 
     protected Element notice = new Element(browser, By.cssSelector("[data-test=notice]"));
     protected Element firstName = new Element(browser, By.cssSelector("[data-test=first_name]"));
@@ -23,12 +22,7 @@ public class ShowAddressPage extends PageObject {
     }
 
     public boolean isAddress(AddressData address) {
-        return address.getFirstName().equals(firstName.getText()) &&
-                address.getLastName().equals(lastName.getText()) &&
-                address.getStreetAddress().equals(streetAddress.getText()) &&
-                address.getSecondaryAddress().equals(secondaryAddress.getText()) &&
-                address.getCity().equals(city.getText()) &&
-                address.getZipCode().equals(zipCode.getText());
+        return isCorrectData(address);
     }
 
     @Override

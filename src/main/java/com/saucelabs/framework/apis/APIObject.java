@@ -24,15 +24,11 @@ public abstract class APIObject {
     public Response create(Object object) {
         RequestSpecification requestSpecification = this.generateGiven();
         return requestSpecification
-                .log()
-                .all()
                 .contentType(ContentType.JSON)
                 .body(object)
                 .when()
                 .post(this.getPath())
                 .then()
-                .log()
-                .all()
                 .extract()
                 .response();
     }
@@ -62,12 +58,12 @@ public abstract class APIObject {
                 .response();
     }
 
+    // TODO - implement update
     public void update(String id, DataObject data) {
-
     }
 
+    // TODO - implement destroy
     public void destroy(String id) {
-
     }
 
 

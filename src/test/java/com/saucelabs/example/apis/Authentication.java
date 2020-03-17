@@ -4,5 +4,4 @@ import lombok.Getter;
 
 public class Authentication extends BaseAPI {
     @Getter private String endpoint = "users";
-
 }

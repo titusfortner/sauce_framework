@@ -13,7 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public abstract class PageObject {
-    @Setter public static Browser browser;
+    @Getter private String baseURL;
+    @Getter @Setter protected static Browser browser;
     @Getter private Set<String> elements = new HashSet<>();
     OnPage required;
 
@@ -31,25 +32,32 @@ public abstract class PageObject {
         try {
             if (!required.url().isEmpty()) {
                 browser.get(required.url());
+                return;
+            } else if (!required.path().isEmpty()) {
+                browser.get(this.getBaseURL() + required.path());
+                return;
             }
-        } catch (NullPointerException ex) {
-            throw new Exception("Unable to visit as URL is not defined in Page Object " + this.getClass());
+        } catch (NullPointerException ignored) {
         }
+        throw new Exception("Either path or url must be defined in Page Object " + this.getClass());
     }
 
     @SneakyThrows
     public boolean isOnPage() {
         if (required == null) {
-            throw new Exception("No means were provided to check if on page forPage Object " + this.getClass());
+            throw new Exception("No means were provided to check if on page for Page Object " + this.getClass());
         }
         if (!required.url().isEmpty() && !browser.getCurrentUrl().equals(required.url())) {
+            return false;
+        }
+        if (!required.path().isEmpty() && !browser.getCurrentUrl().equals(this.getBaseURL() + required.path())) {
             return false;
         }
         if (!required.title().isEmpty() && !browser.getTitle().equals(required.title())) {
             return false;
         }
         for (String element : required.elements()) {
-            Element htmlElement = (Element) getValue(element);
+            Element htmlElement = (Element) getElement(element);
             if (!htmlElement.doesExist()) {
                 return false;
             }
@@ -62,12 +70,23 @@ public abstract class PageObject {
 
         for (String key : elements) {
             if (keys.contains(key)) {
-                setValue((Element) getValue(key), data.getValue(key));
+                setValue((Element) getElement(key), data.getValue(key));
             }
         }
     }
 
-    public Object getValue(String key) {
+    public boolean isCorrectData(DataObject data) {
+        Set<String> keys = data.getKeys();
+
+        for (String key : elements) {
+            if (keys.contains(key) && !valueMatches((Element) getElement(key), data.getValue(key))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Object getElement(String key) {
         try {
             Field declaredField = this.getClass().getDeclaredField(key);
             declaredField.setAccessible(true);
@@ -82,5 +101,9 @@ public abstract class PageObject {
         if (el.getClass().equals(TextField.class)) {
             ((TextField) el).set((String) value);
         }
+    }
+
+    public boolean valueMatches(Element el, Object value) {
+        return el.getText().equals(value);
     }
 }

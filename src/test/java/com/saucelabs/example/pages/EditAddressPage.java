@@ -3,10 +3,9 @@ package com.saucelabs.example.pages;
 import com.saucelabs.example.data.AddressData;
 import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.elements.TextField;
-import com.saucelabs.framework.pages.PageObject;
 import org.openqa.selenium.By;
 
-public class EditAddressPage extends PageObject {
+public class EditAddressPage extends BasePage {
 
     protected TextField firstName = new TextField(browser, By.id("address_first_name"));
     protected TextField lastName = new TextField(browser, By.id("address_last_name"));

@@ -28,10 +28,10 @@ public class ElementTest extends BaseTest {
     @Test
     public void getsValue() {
         Login login = new Login();
-        TextField username = new TextField(browser, By.id("password"));
+        TextField createdElement = new TextField(browser, By.id("password"));
 
-        TextField value = (TextField) login.getValue("password");
-        Assert.assertEquals(username, value);
+        TextField receivedElement = (TextField) login.getElement("password");
+        Assert.assertEquals(createdElement, receivedElement);
     }
 
     @Test

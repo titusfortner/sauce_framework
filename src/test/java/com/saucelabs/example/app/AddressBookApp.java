@@ -17,16 +17,12 @@ public class AddressBookApp {
         String rememberToken = response.getCookies().get("remember_token");
 
         Cookie cookie = new Cookie("remember_token", rememberToken);
-        PageObject.browser.manage().addCookie(cookie);
-       // PageObject.browser.navigate().refresh();
-
+        PageObject.getBrowser().manage().addCookie(cookie);
     }
+
     public UserData authenticateNewUser() {
         UserData userData = new UserData();
         authenticateNewUser(userData);
         return userData;
     }
-
-
-
 }

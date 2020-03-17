@@ -14,18 +14,21 @@ public class AuthenticationAPITest extends BaseTest {
         AddressBookApp application = new AddressBookApp();
         application.authenticateNewUser();
 
+        HomePage homePage = new HomePage();
+        homePage.visit();
+
         HeaderSection headerSection = new HeaderSection();
         Assert.assertTrue(headerSection.isLoggedIn());
     }
 
     @Test
     public void authenticateProvidedUser() {
-        HomePage homePage = new HomePage();
-        homePage.visit();
-
         AddressBookApp application = new AddressBookApp();
         UserData userData = new UserData();
         application.authenticateNewUser(userData);
+
+        HomePage homePage = new HomePage();
+        homePage.visit();
 
         HeaderSection headerSection = new HeaderSection();
         Assert.assertTrue(headerSection.isLoggedIn(userData));

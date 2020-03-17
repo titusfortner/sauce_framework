@@ -4,11 +4,10 @@ import com.saucelabs.example.data.UserData;
 import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.elements.TextField;
 import com.saucelabs.framework.pages.OnPage;
-import com.saucelabs.framework.pages.PageObject;
 import org.openqa.selenium.By;
 
-@OnPage(url="https://address-book-example.herokuapp.com/sign_up")
-public class SignUpPage extends PageObject {
+@OnPage(path="/sign_up")
+public class SignUpPage extends BasePage {
 
     protected TextField email = new TextField(browser, By.id("user_email"));
     protected TextField password = new TextField(browser, By.id("user_password"));

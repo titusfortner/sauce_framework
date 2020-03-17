@@ -9,4 +9,5 @@ public @interface OnPage {
     String url() default "";
     String title() default "";
     String[] elements() default {};
+    String path() default "";
 }

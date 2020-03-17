@@ -4,11 +4,10 @@ import com.saucelabs.example.data.AddressData;
 import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.elements.TextField;
 import com.saucelabs.framework.pages.OnPage;
-import com.saucelabs.framework.pages.PageObject;
 import org.openqa.selenium.By;
 
-@OnPage(url="https://address-book-example.herokuapp.com/addresses/new")
-public class NewAddressPage extends PageObject {
+@OnPage(path="/addresses/new")
+public class NewAddressPage extends BasePage {
 
     protected TextField firstName = new TextField(browser, By.id("address_first_name"));
     protected TextField lastName = new TextField(browser, By.id("address_last_name"));

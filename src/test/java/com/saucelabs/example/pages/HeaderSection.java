@@ -2,10 +2,9 @@ package com.saucelabs.example.pages;
 
 import com.saucelabs.example.data.UserData;
 import com.saucelabs.framework.elements.Element;
-import com.saucelabs.framework.pages.PageObject;
 import org.openqa.selenium.By;
 
-public class HeaderSection extends PageObject {
+public class HeaderSection extends BasePage {
 
     protected Element logOut = new Element(browser, By.cssSelector("[data-test=sign-out]"));
     protected Element currentUser = new Element(browser, By.cssSelector("[data-test=current-user]"));

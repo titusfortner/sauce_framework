@@ -16,7 +16,7 @@ public class AddressAPI extends BaseAPI {
 
     @Override
     protected RequestSpecification generateGiven() {
-        String rememberToken = PageObject.browser.manage().getCookieNamed("remember_token").getValue();
+        String rememberToken = PageObject.getBrowser().manage().getCookieNamed("remember_token").getValue();
 
         return given().header("Cookie", "remember_token=" + rememberToken);
     }

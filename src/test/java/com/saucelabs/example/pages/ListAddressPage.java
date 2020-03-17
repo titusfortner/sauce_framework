@@ -3,11 +3,10 @@ package com.saucelabs.example.pages;
 import com.saucelabs.example.data.AddressData;
 import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.pages.OnPage;
-import com.saucelabs.framework.pages.PageObject;
 import org.openqa.selenium.By;
 
-@OnPage(url="https://address-book-example.herokuapp.com/addresses")
-public class ListAddressPage extends PageObject {
+@OnPage(path="/addresses")
+public class ListAddressPage extends BasePage {
 
     protected Element notice = new Element(browser, By.cssSelector("[data-test=notice]"));
 
