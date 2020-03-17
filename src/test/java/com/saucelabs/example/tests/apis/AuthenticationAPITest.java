@@ -1,8 +1,7 @@
 package com.saucelabs.example.tests.apis;
 
-import com.saucelabs.example.app.AddressBookApp;
+import com.saucelabs.example.apis.AuthenticationAPI;
 import com.saucelabs.example.data.UserData;
-import com.saucelabs.example.pages.HeaderSection;
 import com.saucelabs.example.pages.HomePage;
 import com.saucelabs.framework.tests.BaseTest;
 import org.junit.Assert;
@@ -11,26 +10,28 @@ import org.junit.Test;
 public class AuthenticationAPITest extends BaseTest {
     @Test
     public void authenticateNewUser() {
-        AddressBookApp application = new AddressBookApp();
-        application.authenticateNewUser();
+        AuthenticationAPI authenticationAPI = new AuthenticationAPI();
+        UserData userData = authenticationAPI.createUser();
 
         HomePage homePage = new HomePage();
         homePage.visit();
+        homePage.addCookie("remember_token", userData.getId());
+        homePage.visit();
 
-        HeaderSection headerSection = new HeaderSection();
-        Assert.assertTrue(headerSection.isLoggedIn());
+        Assert.assertTrue(homePage.isLoggedIn());
     }
 
     @Test
     public void authenticateProvidedUser() {
-        AddressBookApp application = new AddressBookApp();
+        AuthenticationAPI authenticationAPI = new AuthenticationAPI();
         UserData userData = new UserData();
-        application.authenticateNewUser(userData);
+        UserData createdUser = authenticationAPI.createUser(userData);
 
         HomePage homePage = new HomePage();
         homePage.visit();
+        homePage.addCookie("remember_token", createdUser.getId());
+        homePage.visit();
 
-        HeaderSection headerSection = new HeaderSection();
-        Assert.assertTrue(headerSection.isLoggedIn(userData));
+        Assert.assertTrue(homePage.isLoggedIn(userData));
     }
 }

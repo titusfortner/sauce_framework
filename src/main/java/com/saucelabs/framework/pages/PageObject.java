@@ -7,6 +7,7 @@ import com.saucelabs.framework.elements.TextField;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
+import org.openqa.selenium.Cookie;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
@@ -105,5 +106,14 @@ public abstract class PageObject {
 
     public boolean valueMatches(Element el, Object value) {
         return el.getText().equals(value);
+    }
+
+    public void addCookie(Cookie cookie) {
+        getBrowser().manage().addCookie(cookie);
+    }
+
+    public void addCookie(String key, String value) {
+        Cookie cookie = new Cookie(key, value);
+        addCookie(cookie);
     }
 }

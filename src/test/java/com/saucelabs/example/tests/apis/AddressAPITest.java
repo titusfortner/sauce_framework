@@ -1,12 +1,10 @@
 package com.saucelabs.example.tests.apis;
 
 import com.saucelabs.example.apis.AddressAPI;
-import com.saucelabs.example.app.AddressBookApp;
+import com.saucelabs.example.apis.AuthenticationAPI;
 import com.saucelabs.example.data.AddressData;
-import com.saucelabs.example.pages.EditAddressPage;
-import com.saucelabs.example.pages.ListAddressPage;
-import com.saucelabs.example.pages.NewAddressPage;
-import com.saucelabs.example.pages.ShowAddressPage;
+import com.saucelabs.example.data.UserData;
+import com.saucelabs.example.pages.*;
 import com.saucelabs.example.tests.BaseTest;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,8 +16,12 @@ import java.util.List;
 public class AddressAPITest extends BaseTest {
     @Before
     public void authenticateUser() {
-        AddressBookApp application = new AddressBookApp();
-        application.authenticateNewUser();
+        AuthenticationAPI authenticationAPI = new AuthenticationAPI();
+        UserData userData = authenticationAPI.createUser();
+
+        HomePage homePage = new HomePage();
+        homePage.visit();
+        homePage.addCookie("remember_token", userData.getId());
     }
 
     @Test

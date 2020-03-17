@@ -1,7 +1,6 @@
 package com.saucelabs.example.tests.pages;
 
 import com.saucelabs.example.data.UserData;
-import com.saucelabs.example.pages.HeaderSection;
 import com.saucelabs.example.pages.HomePage;
 import com.saucelabs.example.pages.LogInPage;
 import com.saucelabs.example.pages.SignUpPage;
@@ -28,10 +27,10 @@ public class AuthenticationTest extends BaseTest {
         UserData userData = new UserData();
         signUpPage.signUp(userData);
 
-        HeaderSection headerSection = new HeaderSection();
-        headerSection.logOut();
+        HomePage homePage = new HomePage();
+        homePage.logOut();
 
-        Assert.assertFalse(headerSection.isLoggedIn());
+        Assert.assertFalse(homePage.isLoggedIn());
     }
 
     @Test
@@ -40,13 +39,13 @@ public class AuthenticationTest extends BaseTest {
         signUpPage.visit();
         UserData userData = new UserData();
         signUpPage.signUp(userData);
-        HeaderSection headerSection = new HeaderSection();
-        headerSection.logOut();
+        HomePage homePage = new HomePage();
+        homePage.logOut();
 
         LogInPage logInPage = new LogInPage();
         logInPage.visit();
         logInPage.logIn(userData);
 
-        Assert.assertTrue(headerSection.isLoggedIn());
+        Assert.assertTrue(homePage.isLoggedIn());
     }
 }
