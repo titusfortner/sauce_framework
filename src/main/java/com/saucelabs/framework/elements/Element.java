@@ -72,7 +72,7 @@ public class Element {
     public boolean equals(Object o) {
         if (o == this) {
             return true;
-        } else if (!(o instanceof Element)) {
+        } else if (!this.getClass().isInstance(o)) {
             return false;
         } else {
             try {
