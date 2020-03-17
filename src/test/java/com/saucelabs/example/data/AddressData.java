@@ -1,6 +1,5 @@
 package com.saucelabs.example.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.saucelabs.framework.data.DataObject;
 import lombok.Getter;
@@ -8,8 +7,6 @@ import lombok.Setter;
 
 @Getter @Setter
 public class AddressData extends DataObject {
-    @JsonIgnore
-    private String id;
     @JsonProperty("first_name")
     private String firstName = faker.name().firstName();
     @JsonProperty("last_name")

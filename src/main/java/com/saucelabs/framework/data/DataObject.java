@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Field;
@@ -12,10 +13,11 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
-@JsonIgnoreProperties(value={"keys"}, ignoreUnknown = true)
+@JsonIgnoreProperties(value={"keys", "id"}, ignoreUnknown = true)
 public abstract class DataObject {
     public static Faker faker = new Faker();
     @Getter private Set<String> keys = new HashSet<>();
+    @Getter @Setter private String id;
 
     public DataObject() {
         for (Field field : this.getClass().getDeclaredFields()) {
