@@ -11,8 +11,6 @@ import lombok.SneakyThrows;
 import static io.restassured.RestAssured.given;
 
 public abstract class APIObject {
-    @Getter @Setter private DataObject dataObject;
-    @Getter @Setter private Class<DataObject> dataClass;
     @Getter @Setter private String index;
     @Getter private String baseURL;
     @Getter private String endpoint;

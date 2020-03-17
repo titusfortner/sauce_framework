@@ -33,7 +33,7 @@ public class AddressTest extends BaseTest {
         AddressAPI addressAPI = new AddressAPI();
         AddressData foundAddress = addressAPI.getAddress(id);
 
-        Assert.assertEquals(foundAddress, addressData);
+        Assert.assertEquals(addressData, foundAddress);
     }
 
     @Test
