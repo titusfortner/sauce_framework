@@ -1,26 +1,24 @@
 package com.saucelabs.framework;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.Getter;
 import lombok.experimental.Delegate;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class Browser {
     @Delegate
+    @Getter
     RemoteWebDriver driver;
 
     public Browser() {
-        System.setProperty("wdm.targetPath", "lib/drivers/auto/");
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        this(new BrowserManagerImpl());
+    }
+
+    public Browser(BrowserManager manager) {
+        driver = manager.getDriver();
     }
 
     public Browser(RemoteWebDriver driver) {
         this.driver = driver;
-    }
-
-    public RemoteWebDriver getDriver() {
-        return driver;
     }
 
     public String getName() {
