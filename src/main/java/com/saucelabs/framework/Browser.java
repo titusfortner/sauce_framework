@@ -14,6 +14,10 @@ public class Browser {
         driver = new ChromeDriver();
     }
 
+    public Browser(RemoteWebDriver driver) {
+        this.driver = driver;
+    }
+
     public WebDriver getDriver() {
         return driver;
     }
