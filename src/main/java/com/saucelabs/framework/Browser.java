@@ -26,4 +26,16 @@ public class Browser {
     public String getName() {
         return getDriver().getCapabilities().getBrowserName();
     }
+
+    public void back() {
+        getDriver().navigate().back();
+    }
+
+    public void foward() {
+        getDriver().navigate().forward();
+    }
+
+    public void refresh() {
+        getDriver().navigate().refresh();
+    }
 }
