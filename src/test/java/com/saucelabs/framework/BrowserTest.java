@@ -19,4 +19,11 @@ public class BrowserTest {
         Assert.assertEquals(driver, browser.getDriver());
         browser.close();
     }
+
+    @Test
+    public void quitsBrowser() {
+        Browser browser = new Browser();
+        browser.quit();
+        Assert.assertNull(browser.getSessionId());
+    }
 }

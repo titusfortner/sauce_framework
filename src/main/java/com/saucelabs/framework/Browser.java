@@ -1,11 +1,12 @@
 package com.saucelabs.framework;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
+import lombok.experimental.Delegate;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class Browser {
+    @Delegate
     RemoteWebDriver driver;
 
     public Browser() {
@@ -18,11 +19,7 @@ public class Browser {
         this.driver = driver;
     }
 
-    public WebDriver getDriver() {
+    public RemoteWebDriver getDriver() {
         return driver;
-    }
-
-    public void close() {
-        driver.quit();
     }
 }
