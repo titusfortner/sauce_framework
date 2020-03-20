@@ -18,6 +18,11 @@ public class BrowserInformationTest extends BaseTest {
     }
 
     @Test
+    public void getName() {
+        Assert.assertEquals("chrome", browser.getName());
+    }
+
+    @Test
     public void getPageSource() {
         Assert.assertEquals("<html><head></head><body></body></html>", browser.getPageSource());
     }

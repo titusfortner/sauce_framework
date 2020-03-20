@@ -22,4 +22,8 @@ public class Browser {
     public RemoteWebDriver getDriver() {
         return driver;
     }
+
+    public String getName() {
+        return getDriver().getCapabilities().getBrowserName();
+    }
 }
