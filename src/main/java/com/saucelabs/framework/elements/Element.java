@@ -64,6 +64,15 @@ public class Element {
     }
 
     //
+    // Action Methods
+    //
+
+    public void click() {
+        validateExistence();
+        webElement.click();
+    }
+
+    //
     // Private Methods
     //
 
