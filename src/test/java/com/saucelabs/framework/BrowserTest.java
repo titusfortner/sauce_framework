@@ -3,13 +3,14 @@ package com.saucelabs.framework;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BrowserTest {
     @Test
     public void createsDriver() {
         Browser browser = new Browser();
         Assert.assertEquals(ChromeDriver.class, browser.getDriver().getClass());
-        browser.close();
+        browser.quit();
     }
 
     @Test
@@ -25,5 +26,13 @@ public class BrowserTest {
         Browser browser = new Browser();
         browser.quit();
         Assert.assertNull(browser.getSessionId());
+    }
+
+    @Test
+    public void createsFirefoxDriver() {
+        System.setProperty("PLATFORM", "firefox");
+        Browser browser = new Browser();
+        Assert.assertEquals(FirefoxDriver.class, browser.getDriver().getClass());
+        browser.quit();
     }
 }

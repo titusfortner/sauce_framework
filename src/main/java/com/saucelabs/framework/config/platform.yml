@@ -1,0 +1,12 @@
+default:
+  browserName: "chrome"
+chrome:
+  browserName: "chrome"
+firefox:
+  browserName: "firefox"
+safari:
+  browserName: "safari"
+ie:
+  browserName: "internet explorer"
+edge:
+  browserName: "Microsoft WebDriver"
