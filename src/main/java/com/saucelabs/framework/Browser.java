@@ -1,7 +1,9 @@
 package com.saucelabs.framework;
 
+import com.saucelabs.framework.elements.Element;
 import lombok.Getter;
 import lombok.experimental.Delegate;
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class Browser {
@@ -35,5 +37,9 @@ public class Browser {
 
     public void refresh() {
         getDriver().navigate().refresh();
+    }
+
+    public Element element(By locator) {
+        return new Element(locator);
     }
 }
