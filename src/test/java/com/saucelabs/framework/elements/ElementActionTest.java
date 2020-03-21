@@ -50,7 +50,7 @@ public class ElementActionTest extends BaseTest {
     }
 
     @Test()
-    public void clickElementEventuallyExistThenDisplayed() {
+    public void clickElementEventuallyExistThenEventuallyDisplayed() {
         browser.get("http://watir.com/examples/wait.html");
         browser.element(By.id("add_foobar")).click();
 
@@ -69,6 +69,39 @@ public class ElementActionTest extends BaseTest {
     @Test()
     public void clickElementNeverPresent() {
         Element element = browser.element(By.id("not-there"));
+
+        Instant start = Instant.now();
+        try {
+            element.click();
+            fail("Expected a Timeout Exception that was never thrown");
+        } catch (TimeoutException e) {
+            Instant finish = Instant.now();
+            long duration = Duration.between(start, finish).toMillis();
+            Assert.assertTrue(duration > 5000);
+        }
+    }
+
+    @Test()
+    public void clickElementEventuallyEnabled() {
+        browser.get("http://watir.com/examples/wait.html");
+        browser.element(By.id("enable_btn")).click();
+
+        Element element = browser.element(By.id("btn"));
+
+        Instant start = Instant.now();
+        element.click();
+        Instant finish = Instant.now();
+
+        long duration = Duration.between(start, finish).toMillis();
+        System.out.println(duration);
+        Assert.assertTrue(duration > 500);
+        Assert.assertTrue(duration < 5000);
+    }
+
+    @Test()
+    public void clickNeverEnabled() {
+        browser.get("http://watir.com/examples/wait.html");
+        Element element = browser.element(By.id("btn"));
 
         Instant start = Instant.now();
         try {

@@ -1,6 +1,7 @@
 package com.saucelabs.framework.elements;
 
 import com.saucelabs.framework.Browser;
+import com.saucelabs.framework.exceptions.ElementNotEnabledException;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -68,7 +69,9 @@ public class Element {
     // Action Methods
     //
 
+    // TODO: Move Enabled Check to a Button subclass
     public void click() {
+        synchronizer.act(this, this::validateEnabled);
         synchronizer.act(this, () -> webElement.click());
     }
 
@@ -100,4 +103,10 @@ public class Element {
         }
     }
 
+    void validateEnabled() {
+        locate();
+        if (!isEnabled()) {
+            throw new ElementNotEnabledException("Element needs to be enabled to interact with it " + locator);
+        }
+    }
 }

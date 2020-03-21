@@ -1,5 +1,6 @@
 package com.saucelabs.framework.elements;
 
+import com.saucelabs.framework.exceptions.ElementNotEnabledException;
 import org.awaitility.core.ConditionTimeoutException;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
@@ -21,6 +22,8 @@ class Synchronizer {
                 waitUntilExists(element);
             } catch (ElementNotInteractableException e) {
                 waitUntilPresent(element);
+            } catch (ElementNotEnabledException e) {
+                waitUntilEnabled(element);
             }
         } while (true);
     }
@@ -36,6 +39,14 @@ class Synchronizer {
     private void waitUntilPresent(Element element) {
         try {
             await().atMost(timeout, SECONDS).until(element::isPresent);
+        } catch (ConditionTimeoutException e) {
+            throw new TimeoutException("This element was located, but is not displayed: " + element.getLocator().toString());
+        }
+    }
+
+    public void waitUntilEnabled(Element element) {
+        try {
+            await().atMost(timeout, SECONDS).until(element::isEnabled);
         } catch (ConditionTimeoutException e) {
             throw new TimeoutException("This element was located, but is not displayed: " + element.getLocator().toString());
         }
