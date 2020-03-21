@@ -35,9 +35,9 @@ public class BrowserNavigationTest extends BaseTest {
     @Test
     public void refresh() {
         browser.get("https://www.saucedemo.com/");
-        browser.findElement(By.className("btn_action")).click();
+        browser.getDriver().findElement(By.className("btn_action")).click();
         browser.refresh();
 
-        Assert.assertEquals(0, browser.findElements(By.className("error-button")).size());
+        Assert.assertEquals(0, browser.getDriver().findElements(By.className("error-button")).size());
     }
 }

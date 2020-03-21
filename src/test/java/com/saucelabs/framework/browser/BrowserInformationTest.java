@@ -25,6 +25,6 @@ public class BrowserInformationTest extends BaseTest {
 
     @Test
     public void getPageSource() {
-        Assert.assertEquals("<html><head></head><body></body></html>", browser.getPageSource());
+        Assert.assertEquals("<html><head></head><body></body></html>", browser.getText());
     }
 }

@@ -18,14 +18,14 @@ public class BrowserTest {
         ChromeDriver driver = new ChromeDriver();
         Browser browser = new Browser(driver);
         Assert.assertEquals(driver, browser.getDriver());
-        browser.close();
+        browser.quit();
     }
 
     @Test
     public void quitsBrowser() {
         Browser browser = new Browser();
         browser.quit();
-        Assert.assertNull(browser.getSessionId());
+        Assert.assertNull(browser.getDriver().getSessionId());
     }
 
 // This needs to get mocked out to run in parallel
