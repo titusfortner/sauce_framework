@@ -1,5 +1,6 @@
-package com.saucelabs.framework;
+package com.saucelabs.framework.browser;
 
+import com.saucelabs.framework.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 
 public class BaseTest {
-    Browser browser;
+    public Browser browser;
 
     @Before
     public void setup() {

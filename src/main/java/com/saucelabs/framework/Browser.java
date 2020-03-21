@@ -40,6 +40,6 @@ public class Browser {
     }
 
     public Element element(By locator) {
-        return new Element(locator);
+        return new Element(this, locator);
     }
 }
