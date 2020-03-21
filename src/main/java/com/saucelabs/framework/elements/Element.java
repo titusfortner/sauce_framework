@@ -17,6 +17,10 @@ public class Element {
         this.browser = browser;
     }
 
+    //
+    // Predicate Methods
+    //
+
     // This will always make a wire call
     public boolean doesExist() {
         reset();
@@ -49,6 +53,19 @@ public class Element {
             }
         }
     }
+
+    //
+    // Information Methods
+    //
+
+    public String getText() {
+        validateExistence();
+        return webElement.getText();
+    }
+
+    //
+    // Private Methods
+    //
 
     private void locate() {
         if (this.webElement == null) {
