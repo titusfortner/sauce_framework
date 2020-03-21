@@ -18,7 +18,7 @@ public class BrowserNavigationTest extends BaseTest {
         browser.get("https://www.saucedemo.com/");
         browser.get("https://www.google.com/");
         browser.back();
-        browser.foward();
+        browser.forward();
 
         Assert.assertEquals(browser.getCurrentUrl(), "https://www.google.com/");
     }

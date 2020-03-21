@@ -31,7 +31,7 @@ public class Browser {
         getDriver().navigate().back();
     }
 
-    public void foward() {
+    public void forward() {
         getDriver().navigate().forward();
     }
 
