@@ -24,6 +24,11 @@ public class Element {
         return isLocated();
     }
 
+    public boolean isPresent() {
+        locate();
+        return isLocated() && webElement.isDisplayed();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {

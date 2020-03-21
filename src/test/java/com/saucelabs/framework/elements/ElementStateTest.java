@@ -16,9 +16,24 @@ public class ElementStateTest extends BaseTest {
 
     @Test
     public void elementDoesNotExist() {
-        browser.get("https://www.saucedemo.com");
         Element element = browser.element(By.id("foo"));
 
         Assert.assertFalse(element.doesExist());
+    }
+
+    @Test
+    public void elementDisplayed() {
+        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        Element element = browser.element(By.id("new_user_interests_dentistry"));
+
+        Assert.assertTrue(element.isPresent());
+    }
+
+    @Test
+    public void elementNotDisplayed() {
+        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        Element element = browser.element(By.id("new_user_interests_dolls"));
+
+        Assert.assertFalse(element.isPresent());
     }
 }
