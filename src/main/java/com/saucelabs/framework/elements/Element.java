@@ -29,6 +29,11 @@ public class Element {
         return isLocated() && webElement.isDisplayed();
     }
 
+    public boolean isEnabled() {
+        validateExistence();
+        return webElement.isEnabled();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -61,4 +66,12 @@ public class Element {
     private void reset() {
         this.webElement = null;
     }
+
+    private void validateExistence() {
+        locate();
+        if (!isLocated()) {
+            throw new NoSuchElementException("Cannot locate an element using " + locator);
+        }
+    }
+
 }
