@@ -10,6 +10,7 @@ public class Element {
     @Getter private By locator;
     @Getter private Browser browser;
     protected WebElement webElement;
+    private Synchronizer synchronizer = new Synchronizer();
 
 
     public Element(Browser browser, By locator) {
@@ -68,15 +69,14 @@ public class Element {
     //
 
     public void click() {
-        validateExistence();
-        webElement.click();
+        synchronizer.act(this, () -> webElement.click());
     }
 
     //
     // Private Methods
     //
 
-    private void locate() {
+    void locate() {
         if (this.webElement == null) {
             try {
                 this.webElement = browser.getDriver().findElement(locator);
@@ -93,7 +93,7 @@ public class Element {
         this.webElement = null;
     }
 
-    private void validateExistence() {
+    void validateExistence() {
         locate();
         if (!isLocated()) {
             throw new NoSuchElementException("Cannot locate an element using " + locator);
