@@ -13,7 +13,7 @@ import java.time.Instant;
 
 import static junit.framework.TestCase.fail;
 
-public class ElementActionTest extends BaseTest {
+public class ElementClickTest extends BaseTest {
     @Test
     public void clickElementExistsAndVisible() {
         browser.get("http://watir.com/examples/non_control_elements.html");

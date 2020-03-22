@@ -4,6 +4,7 @@ import com.saucelabs.framework.exceptions.ElementNotEnabledException;
 import com.saucelabs.framework.exceptions.Exceptions;
 import lombok.SneakyThrows;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 
@@ -47,6 +48,12 @@ public class Executor {
                 block.run();
                 break;
             } catch (NoSuchElementException | ElementNotEnabledException | ElementNotInteractableException | StaleElementReferenceException e) {
+                if (Instant.now().toEpochMilli() > expireTime) {
+                    String message = "After attempting for " + waitTime + " seconds, " + e.getMessage();
+                    throw Exceptions.createWithMessage(e, message);
+                }
+                // This is what we get for ReadOnly Text
+            } catch (InvalidElementStateException e) {
                 if (Instant.now().toEpochMilli() > expireTime) {
                     String message = "After attempting for " + waitTime + " seconds, " + e.getMessage();
                     throw Exceptions.createWithMessage(e, message);

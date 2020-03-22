@@ -1,6 +1,7 @@
 package com.saucelabs.framework.exceptions;
 
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 
@@ -17,6 +18,9 @@ public class Exceptions {
         }
         if (e.getClass().equals(ElementNotEnabledException.class)) {
             return new ElementNotEnabledException(message);
+        }
+        if (e.getClass().equals(InvalidElementStateException.class)) {
+                return new InvalidElementStateException(message);
         }
         return e;
     }

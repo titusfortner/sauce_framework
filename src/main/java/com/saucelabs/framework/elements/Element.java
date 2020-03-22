@@ -87,6 +87,22 @@ public class Element {
         executor.runWithRetries(this, () -> webElement.click());
     }
 
+    // TODO: Move this method to TextField subclass
+    public void setText(String text) {
+        clear();
+        appendText(text);
+    }
+
+    // TODO: Move this method to TextField subclass
+    public void appendText(String text) {
+        executor.runWithRetries(this, () -> webElement.sendKeys(text));
+    }
+
+    // TODO: Move this method to TextField subclass
+    public void clear() {
+        executor.runWithRetries(this, () -> webElement.clear());
+    }
+
     //
     // Private Methods
     //
