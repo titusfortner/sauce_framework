@@ -38,7 +38,7 @@ public class Executor {
     }
 
     @SneakyThrows
-    Object run(Element element, Callable block) {
+    Object run(Element element, Callable<Object> block) {
         try {
             locate(element);
             return block.call();
@@ -73,7 +73,7 @@ public class Executor {
     }
 
     @SneakyThrows
-    Object runWithRetries(Element element, Callable block) {
+    Object runWithRetries(Element element, Callable<Object> block) {
         long expireTime = Instant.now().toEpochMilli() + SECONDS.toMillis(waitTime);
         while (true) {
             try {
