@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -19,6 +20,21 @@ public class ElementInformationTest extends BaseTest {
 
         Assert.assertEquals("This is a footer.", element.getText());
     }
+
+    @Test
+    public void getTextElementWhenStale() {
+        browser.get("http://watir.com/examples/non_control_elements.html");
+        Element element = browser.element(By.id("footer"));
+        element.doesExist();
+        browser.refresh();
+
+        try {
+            element.getText();
+            Assert.assertTrue(true);
+        } catch (StaleElementReferenceException e) {
+            Assert.fail("Getting text should re-look up stale elements");
+        }
+   }
 
     @Test()
     public void getTextErrorsWhenElementNeverExistsAfterWait() {
@@ -72,6 +88,29 @@ public class ElementInformationTest extends BaseTest {
         Element element = browser.element(By.tagName("p"));
 
         Assert.assertEquals("ruby-library", element.getAttribute("data-type"));
+    }
+
+    @Test
+    public void getAttributeWhenStale() {
+        browser.get("http://watir.com/examples/data_attributes.html");
+        Element element = browser.element(By.tagName("p"));
+        element.doesExist();
+        browser.refresh();
+
+        try {
+            element.getAttribute("whatever");
+            Assert.assertTrue(true);
+        } catch (StaleElementReferenceException e) {
+            Assert.fail("Getting attribute should re-look up stale elements");
+        }
+    }
+
+    @Test
+    public void getAttributeNullWhenMissing() {
+        browser.get("http://watir.com/examples/data_attributes.html");
+        Element element = browser.element(By.tagName("p"));
+
+        Assert.assertNull(element.getAttribute("foo"));
     }
 
     @Test

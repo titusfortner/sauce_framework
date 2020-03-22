@@ -42,6 +42,17 @@ public class ElementStateTest extends BaseTest {
     }
 
     @Test
+    public void elementPresentWhenStale() {
+        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        Element element = browser.element(By.id("new_user_interests_dentistry"));
+        element.doesExist();
+
+        browser.refresh();
+
+        Assert.assertTrue(element.isPresent());
+    }
+
+    @Test
     public void elementNotPresentWhenNotExistWithoutWaiting() {
         Element element = browser.element(By.id("not-there"));
 
@@ -77,6 +88,17 @@ public class ElementStateTest extends BaseTest {
     }
 
     @Test
+    public void elementEnabledWhenStale() {
+        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        Element element = browser.element(By.id("new_user_occupation"));
+        element.doesExist();
+
+        browser.refresh();
+
+        Assert.assertTrue(element.isEnabled());
+    }
+
+    @Test
     public void elementNotEnabledWithoutWaiting() {
         browser.get("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_species"));
@@ -90,7 +112,7 @@ public class ElementStateTest extends BaseTest {
         Assert.assertTrue(duration < 5000);
     }
 
-    @Test()
+    @Test
     public void elementEnabledErrorsWhenNotExistWithoutWaiting() {
         Element element = browser.element(By.id("not-there"));
 
@@ -103,5 +125,24 @@ public class ElementStateTest extends BaseTest {
             long duration = Duration.between(start, finish).toMillis();
             Assert.assertTrue(duration < 5000);
         }
+    }
+
+    @Test
+    public void elementStale() {
+        browser.get("https://www.saucedemo.com");
+        Element element = browser.element(By.id("user-name"));
+        element.doesExist();
+        browser.refresh();
+
+        Assert.assertTrue(element.isStale());
+    }
+
+    @Test
+    public void elementNotStale() {
+        browser.get("https://www.saucedemo.com");
+        Element element = browser.element(By.id("user-name"));
+        element.doesExist();
+
+        Assert.assertFalse(element.isStale());
     }
 }

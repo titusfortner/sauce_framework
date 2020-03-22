@@ -7,6 +7,7 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
 
 import java.time.Instant;
 import java.util.concurrent.Callable;
@@ -15,6 +16,15 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Executor {
     public static int waitTime = 10;
+
+    boolean isStale(WebElement element) {
+        try {
+            element.getAttribute("anything");
+            return false;
+        } catch (StaleElementReferenceException e) {
+            return true;
+        }
+    }
 
     void run(Element element, Runnable block) {
         try {

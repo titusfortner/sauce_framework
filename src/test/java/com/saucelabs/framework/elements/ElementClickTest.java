@@ -7,11 +7,12 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 
 import java.time.Duration;
 import java.time.Instant;
 
-import static junit.framework.TestCase.fail;
+import static org.junit.Assert.fail;
 
 public class ElementClickTest extends BaseTest {
     @Test
@@ -21,6 +22,22 @@ public class ElementClickTest extends BaseTest {
 
         element.click();
         Assert.assertEquals("Ruby!", element.getText());
+    }
+
+    @Test
+    public void clickElementWhenStale() {
+        browser.get("http://watir.com/examples/non_control_elements.html");
+        Element element = browser.element(By.id("best_language"));
+        element.doesExist();
+
+        browser.refresh();
+
+        try {
+            element.click();
+            Assert.assertTrue(true);
+        } catch (StaleElementReferenceException e) {
+            fail("Click should re-look up stale elements");
+        }
     }
 
     @Test()

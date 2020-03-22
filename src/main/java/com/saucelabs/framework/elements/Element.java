@@ -40,6 +40,10 @@ public class Element {
         }
     }
 
+    public boolean isStale() {
+        return executor.isStale(webElement);
+    }
+
     // Exception if doesn't exist
     public boolean isEnabled() {
         return (boolean) executor.run(this, () -> webElement.isEnabled());
