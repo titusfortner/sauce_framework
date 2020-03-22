@@ -69,6 +69,14 @@ public class Element {
         return (String) executor.runWithRetries(this, () -> webElement.getText());
     }
 
+    public String getAttribute(String attribute) {
+        return (String) executor.runWithRetries(this, () -> webElement.getAttribute(attribute));
+    }
+
+    public String getValue() {
+        return getAttribute("value");
+    }
+
     //
     // Action Methods
     //

@@ -65,4 +65,59 @@ public class ElementInformationTest extends BaseTest {
         Assert.assertTrue(text.isEmpty());
         Assert.assertTrue(duration < 5000);
     }
+
+    @Test
+    public void getAttribute() {
+        browser.get("http://watir.com/examples/data_attributes.html");
+        Element element = browser.element(By.tagName("p"));
+
+        Assert.assertEquals("ruby-library", element.getAttribute("data-type"));
+    }
+
+    @Test
+    public void getAttributeElementDisabled() {
+        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        Element element = browser.element(By.id("new_user_species"));
+
+        Assert.assertEquals("new_user_species", element.getAttribute("name"));
+    }
+
+    @Test
+    public void getAttributeElementHidden() {
+        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        Element element = browser.element(By.id("new_user_interests_dolls"));
+
+        Assert.assertEquals("new_user_interests", element.getAttribute("name"));
+    }
+
+    @Test
+    public void getAttributeElementNotExist() {
+        Element element = browser.element(By.id("not-there"));
+
+        Instant start = Instant.now();
+        try {
+            element.getAttribute("anything");
+            fail("Expected a NoSuchElementException that was never thrown");
+        } catch (NoSuchElementException e) {
+            Instant finish = Instant.now();
+            long duration = Duration.between(start, finish).toMillis();
+            Assert.assertTrue(duration > 5000);
+        }
+    }
+
+    @Test
+    public void getValue() {
+        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        Element element = browser.element(By.id("new_user_occupation"));
+
+        Assert.assertEquals("Developer", element.getValue());
+    }
+
+    @Test
+    public void getValueElementReadOnly() {
+        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        Element element = browser.element(By.id("new_user_code"));
+
+        Assert.assertEquals("HE2FF8", element.getValue());
+    }
 }
