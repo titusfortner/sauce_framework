@@ -79,17 +79,25 @@ public class Executor {
             try {
                 locate(element);
                 return block.call();
-            } catch (NoSuchElementException | ElementNotEnabledException | ElementNotInteractableException | StaleElementReferenceException e) {
+            } catch (NoSuchElementException | ElementNotEnabledException | ElementNotInteractableException e) {
                 if (Instant.now().toEpochMilli() > expireTime) {
                     String message = "After attempting for " + waitTime + " seconds, " + e.getMessage();
                     throw Exceptions.createWithMessage(e, message);
                 }
+            } catch (StaleElementReferenceException e) {
+                if (Instant.now().toEpochMilli() > expireTime) {
+                    String message = "After attempting for " + waitTime + " seconds, " + e.getMessage();
+                    throw Exceptions.createWithMessage(e, message);
+                }
+                element.reset();
             }
         }
     }
 
     // This is always called from context of the Executor
     private void locate(Element element) {
-        element.setWebElement(element.getDriver().findElement(element.getLocator()));
+        if (element.webElement == null) {
+            element.setWebElement(element.getDriver().findElement(element.getLocator()));
+        }
     }
 }

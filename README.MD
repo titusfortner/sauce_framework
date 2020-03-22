@@ -29,6 +29,7 @@ See LICENSE file for details.
 2. Basic browser wrapper
 3. Basic element wrapper
 4. Synchronization implementation for element methods
+5. Staleness Relocation
 
 ### Future Ideas
 1. Alert Wrapper

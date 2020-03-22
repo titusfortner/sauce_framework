@@ -28,8 +28,12 @@ public class Element {
     // This will always make a wire call
     public boolean doesExist() {
         reset();
-        locate();
-        return isLocated();
+        try {
+            executor.run(this, () -> {});
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     public boolean isPresent() {
@@ -111,33 +115,11 @@ public class Element {
     // Private Methods
     //
 
-    // Only locates if not cached
-    void locate() {
-        if (!isLocated()) {
-            try {
-                executor.run(this, () -> {});
-            } catch (NoSuchElementException ignored) {
-            }
-        }
-    }
-
-    boolean isLocated() {
-        return this.webElement != null;
-    }
-
     void reset() {
         this.webElement = null;
     }
 
-    void validateExistence() {
-        locate();
-        if (!isLocated()) {
-            throw new NoSuchElementException("Cannot locate an element using " + locator);
-        }
-    }
-
     void validateEnabled() {
-        locate();
         if (!isEnabled()) {
             throw new ElementNotEnabledException("Element needs to be enabled to interact with it " + locator);
         }
