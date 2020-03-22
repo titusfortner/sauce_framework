@@ -6,6 +6,11 @@ We want something flexible that encourages good practices
 The plan is to essentially create a light-watir implementation in Java, with the most powerful and easiest to implement
 features, along with some of the best features of page-object gem
 
+Inspiration for this code drawn from numerous places including:
+* [Watir](https://watir.com)
+* [Mineraloil](https://github.com/lithiumtech/mineraloil-selenium.git)
+
+
 See LICENSE file for details.
 
 ### Goals
@@ -20,5 +25,19 @@ See LICENSE file for details.
 8. Discourage imperative test writing
 
 ### Status
+1. Implementation for generating Browser Options
+2. Basic browser wrapper
+3. Basic element wrapper
+4. Synchronization implementation for element methods
 
-### Ideas
+### Future Ideas
+1. Alert Wrapper
+2. Windows Wrapper
+3. After Hooks
+4. Subclass Elements
+5. Execute Scripts
+8. Screenshot Wrapper
+9. Cookies Wrapper
+10. Common Actions Class Wrapper: Hover, Drag & Drop, etc
+11. Element Collection Wrapper
+12. Scrolling Support

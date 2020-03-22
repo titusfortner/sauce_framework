@@ -6,6 +6,11 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
+import java.time.Duration;
+import java.time.Instant;
+
+import static junit.framework.TestCase.fail;
+
 public class ElementStateTest extends BaseTest {
     @Test
     public void elementExists() {
@@ -16,14 +21,20 @@ public class ElementStateTest extends BaseTest {
     }
 
     @Test
-    public void elementDoesNotExist() {
+    public void elementDoesNotExistWithoutWaiting() {
         Element element = browser.element(By.id("foo"));
 
-        Assert.assertFalse(element.doesExist());
+        Instant start = Instant.now();
+        boolean exists = element.doesExist();
+        Instant finish = Instant.now();
+        long duration = Duration.between(start, finish).toMillis();
+
+        Assert.assertFalse(exists);
+        Assert.assertTrue(duration < 5000);
     }
 
     @Test
-    public void elementDisplayed() {
+    public void elementPresentWhenDisplayed() {
         browser.get("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_interests_dentistry"));
 
@@ -31,18 +42,30 @@ public class ElementStateTest extends BaseTest {
     }
 
     @Test
-    public void elementNotDisplayed() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
-        Element element = browser.element(By.id("new_user_interests_dolls"));
+    public void elementNotPresentWhenNotExistWithoutWaiting() {
+        Element element = browser.element(By.id("not-there"));
 
-        Assert.assertFalse(element.isPresent());
+        Instant start = Instant.now();
+        boolean present = element.isPresent();
+        Instant finish = Instant.now();
+        long duration = Duration.between(start, finish).toMillis();
+
+        Assert.assertFalse(present);
+        Assert.assertTrue(duration < 5000);
     }
 
     @Test
-    public void elementNotDisplayedWhenNotExist() {
-        Element element = browser.element(By.id("not-there"));
+    public void elementNotPresentWhenExistsAndNotDisplayedWithoutWaiting() {
+        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        Element element = browser.element(By.id("new_user_interests_dolls"));
 
-        Assert.assertFalse(element.isPresent());
+        Instant start = Instant.now();
+        boolean present = element.isPresent();
+        Instant finish = Instant.now();
+        long duration = Duration.between(start, finish).toMillis();
+
+        Assert.assertFalse(present);
+        Assert.assertTrue(duration < 5000);
     }
 
     @Test
@@ -54,17 +77,31 @@ public class ElementStateTest extends BaseTest {
     }
 
     @Test
-    public void elementNotEnabled() {
+    public void elementNotEnabledWithoutWaiting() {
         browser.get("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_species"));
 
-        Assert.assertFalse(element.isEnabled());
+        Instant start = Instant.now();
+        boolean enabled = element.isEnabled();
+        Instant finish = Instant.now();
+        long duration = Duration.between(start, finish).toMillis();
+
+        Assert.assertFalse(enabled);
+        Assert.assertTrue(duration < 5000);
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void elementEnabledWhenNotExistErrors() {
+    @Test()
+    public void elementEnabledErrorsWhenNotExistWithoutWaiting() {
         Element element = browser.element(By.id("not-there"));
 
-        element.isEnabled();
+        Instant start = Instant.now();
+        try {
+            element.isEnabled();
+            fail("Expected a NoSuchElementException that was never thrown");
+        } catch (NoSuchElementException e) {
+            Instant finish = Instant.now();
+            long duration = Duration.between(start, finish).toMillis();
+            Assert.assertTrue(duration < 5000);
+        }
     }
 }

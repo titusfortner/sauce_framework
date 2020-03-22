@@ -3,15 +3,17 @@ package com.saucelabs.framework.elements;
 import com.saucelabs.framework.Browser;
 import com.saucelabs.framework.exceptions.ElementNotEnabledException;
 import lombok.Getter;
+import lombok.Setter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class Element {
     @Getter private By locator;
     @Getter private Browser browser;
-    protected WebElement webElement;
-    private Synchronizer synchronizer = new Synchronizer();
+    @Setter WebElement webElement;
+    private Executor executor = new Executor();
 
 
     public Element(Browser browser, By locator) {
@@ -20,7 +22,7 @@ public class Element {
     }
 
     //
-    // Predicate Methods
+    // Predicate Methods; No automatic waits
     //
 
     // This will always make a wire call
@@ -31,13 +33,16 @@ public class Element {
     }
 
     public boolean isPresent() {
-        locate();
-        return isLocated() && webElement.isDisplayed();
+        try {
+            return (boolean) executor.run(this, () -> webElement.isDisplayed());
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
+    // Exception if doesn't exist
     public boolean isEnabled() {
-        validateExistence();
-        return webElement.isEnabled();
+        return (boolean) executor.run(this, () -> webElement.isEnabled());
     }
 
     @Override
@@ -61,8 +66,7 @@ public class Element {
     //
 
     public String getText() {
-        validateExistence();
-        return webElement.getText();
+        return (String) executor.runWithRetries(this, () -> webElement.getText());
     }
 
     //
@@ -71,28 +75,29 @@ public class Element {
 
     // TODO: Move Enabled Check to a Button subclass
     public void click() {
-        synchronizer.act(this, this::validateEnabled);
-        synchronizer.act(this, () -> webElement.click());
+        executor.runWithRetries(this, this::validateEnabled);
+        executor.runWithRetries(this, () -> webElement.click());
     }
 
     //
     // Private Methods
     //
 
+    // Only locates if not cached
     void locate() {
-        if (this.webElement == null) {
+        if (!isLocated()) {
             try {
-                this.webElement = browser.getDriver().findElement(locator);
+                executor.run(this, () -> {});
             } catch (NoSuchElementException ignored) {
             }
         }
     }
 
-    private boolean isLocated() {
+    boolean isLocated() {
         return this.webElement != null;
     }
 
-    private void reset() {
+    void reset() {
         this.webElement = null;
     }
 
@@ -108,5 +113,9 @@ public class Element {
         if (!isEnabled()) {
             throw new ElementNotEnabledException("Element needs to be enabled to interact with it " + locator);
         }
+    }
+
+    public WebDriver getDriver() {
+        return browser.getDriver();
     }
 }

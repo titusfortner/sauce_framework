@@ -40,11 +40,6 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.26</version>
         </dependency>
-        <dependency>
-            <groupId>org.awaitility</groupId>
-            <artifactId>awaitility</artifactId>
-            <version>4.0.2</version>
-        </dependency>
     </dependencies>
 
     <build>
