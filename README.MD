@@ -32,13 +32,19 @@ See LICENSE file for details.
 5. Staleness Relocation
 
 ### Future Ideas
-1. Alert Wrapper
-2. Windows Wrapper
-3. After Hooks
+0. Logging Support
+1. Element Collection Wrapper
+2. Page Object Implementation
+3. Data Object Implementation
 4. Subclass Elements
-5. Execute Scripts
-8. Screenshot Wrapper
-9. Cookies Wrapper
-10. Common Actions Class Wrapper: Hover, Drag & Drop, etc
-11. Element Collection Wrapper
-12. Scrolling Support
+5. Automatic Form Filling
+6. Automatic Data Reading
+7. API Integration
+8. Common Actions Class Wrapper: Hover, Drag & Drop, etc
+9. Execute Scripts
+10. Alert Wrapper
+11. Windows Wrapper
+12. Screenshot Wrapper
+13. Cookies Wrapper
+14. Scrolling Support
+15. After Hooks
