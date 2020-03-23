@@ -39,10 +39,10 @@ public abstract class PageObject {
     public void visit() {
         try {
             if (!required.url().isEmpty()) {
-                browser.get(required.url());
+                browser.goTo(required.url());
                 return;
             } else if (!required.path().isEmpty()) {
-                browser.get(this.getBaseURL() + required.path());
+                browser.goTo(this.getBaseURL() + required.path());
                 return;
             }
         } catch (NullPointerException ignored) {
