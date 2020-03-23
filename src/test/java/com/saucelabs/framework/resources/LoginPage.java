@@ -16,4 +16,10 @@ public class LoginPage extends PageObject {
         passwordField.setText(password);
         submitButton.click();
     }
+
+    public void login(UserData user) {
+        usernameField.setText(user.getUsername());
+        passwordField.setText(user.getPassword());
+        submitButton.click();
+    }
 }
