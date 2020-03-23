@@ -36,13 +36,13 @@ See LICENSE file for details.
 
 ### Future Ideas
 1. Support Nested Elements
-2. Logging Support
-4. Subclass Elements
-5. Automatic Form Filling
-6. Automatic Data Reading
+2. Subclass Elements
+3. Automatic Form Filling
+4. Automatic Data Reading
+5. Execute Scripts
+6. Logging Support
 7. API Integration
 8. Common Actions Class Wrapper: Hover, Drag & Drop, etc
-9. Execute Scripts
 10. Alert Wrapper
 11. Windows Wrapper
 12. Screenshot Wrapper
