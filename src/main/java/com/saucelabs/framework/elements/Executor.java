@@ -18,7 +18,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class Executor {
     public static int waitTime = 10;
 
-    boolean isStale(WebElement element) {
+    static boolean isStale(WebElement element) {
         try {
             element.getAttribute("anything");
             return false;
@@ -27,7 +27,7 @@ public class Executor {
         }
     }
 
-    void run(Element element, Runnable block) {
+    static void run(Element element, Runnable block) {
         try {
             locate(element);
             block.run();
@@ -39,7 +39,7 @@ public class Executor {
     }
 
     @SneakyThrows
-    Object run(Element element, Callable<Object> block) {
+    static Object run(Element element, Callable<Object> block) {
         try {
             locate(element);
             return block.call();
@@ -51,7 +51,7 @@ public class Executor {
     }
 
     @SneakyThrows
-    void runWithRetries(Element element, Runnable block) {
+    static void runWithRetries(Element element, Runnable block) {
         long expireTime = Instant.now().toEpochMilli() + SECONDS.toMillis(waitTime);
         while (true) {
             try {
@@ -74,7 +74,7 @@ public class Executor {
     }
 
     @SneakyThrows
-    Object runWithRetries(Element element, Callable<Object> block) {
+    static Object runWithRetries(Element element, Callable<Object> block) {
         long expireTime = Instant.now().toEpochMilli() + SECONDS.toMillis(waitTime);
         while (true) {
             try {
@@ -95,12 +95,12 @@ public class Executor {
         }
     }
 
-    public List<WebElement> locateAll(Element element) {
+    public static List<WebElement> locateAll(Element element) {
         return element.getDriver().findElements(element.getLocator());
     }
 
     // This is always called from context of the Executor
-    private void locate(Element element) {
+    private static void locate(Element element) {
         if (element.webElement == null) {
             if (element.getIndex() != 0) {
                 element.setWebElement(locateAll(element).get(element.getIndex()));

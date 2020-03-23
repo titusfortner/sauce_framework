@@ -18,7 +18,6 @@ public class Element {
     @Getter private By locator;
     @Getter private Browser browser;
     @Setter WebElement webElement;
-    private Executor executor = new Executor();
 
 
     public Element(Browser browser, By locator) {
@@ -39,7 +38,7 @@ public class Element {
     public boolean doesExist() {
         reset();
         try {
-            executor.run(this, () -> {});
+            Executor.run(this, () -> {});
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -48,19 +47,19 @@ public class Element {
 
     public boolean isPresent() {
         try {
-            return (boolean) executor.run(this, () -> webElement.isDisplayed());
+            return (boolean) Executor.run(this, () -> webElement.isDisplayed());
         } catch (NoSuchElementException e) {
             return false;
         }
     }
 
     public boolean isStale() {
-        return executor.isStale(webElement);
+        return Executor.isStale(webElement);
     }
 
     // Exception if doesn't exist
     public boolean isEnabled() {
-        return (boolean) executor.run(this, () -> webElement.isEnabled());
+        return (boolean) Executor.run(this, () -> webElement.isEnabled());
     }
 
     @Override
@@ -84,11 +83,11 @@ public class Element {
     //
 
     public String getText() {
-        return (String) executor.runWithRetries(this, () -> webElement.getText());
+        return (String) Executor.runWithRetries(this, () -> webElement.getText());
     }
 
     public String getAttribute(String attribute) {
-        return (String) executor.runWithRetries(this, () -> webElement.getAttribute(attribute));
+        return (String) Executor.runWithRetries(this, () -> webElement.getAttribute(attribute));
     }
 
     public String getValue() {
@@ -101,8 +100,8 @@ public class Element {
 
     // TODO: Move Enabled Check to a Button subclass
     public void click() {
-        executor.runWithRetries(this, this::validateEnabled);
-        executor.runWithRetries(this, () -> webElement.click());
+        Executor.runWithRetries(this, this::validateEnabled);
+        Executor.runWithRetries(this, () -> webElement.click());
     }
 
     // TODO: Move this method to TextField subclass
@@ -113,12 +112,12 @@ public class Element {
 
     // TODO: Move this method to TextField subclass
     public void appendText(String text) {
-        executor.runWithRetries(this, () -> webElement.sendKeys(text));
+        Executor.runWithRetries(this, () -> webElement.sendKeys(text));
     }
 
     // TODO: Move this method to TextField subclass
     public void clear() {
-        executor.runWithRetries(this, () -> webElement.clear());
+        Executor.runWithRetries(this, () -> webElement.clear());
     }
 
     //
@@ -140,7 +139,7 @@ public class Element {
     }
 
     public List<Element> toList() {
-        List<WebElement> webElements = executor.locateAll(this);
+        List<WebElement> webElements = Executor.locateAll(this);
         List<Element> elements = new ArrayList<>();
 
         IntStream.range(0, webElements.size()).forEach(index -> {
