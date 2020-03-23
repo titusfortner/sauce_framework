@@ -1,25 +1,24 @@
 package com.saucelabs.framework.pages;
 
 import com.saucelabs.framework.BaseTest;
+import com.saucelabs.framework.exceptions.PageObjectException;
 import com.saucelabs.framework.resources.BadTitlePage;
 import com.saucelabs.framework.resources.BadURLPage;
 import com.saucelabs.framework.resources.LoginPage;
 import com.saucelabs.framework.resources.NoOnPage;
+import com.saucelabs.framework.resources.PathPage;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-public class NavigationTest extends BaseTest {
-    @Before
-    public void setBrowser() {
-        PageObject.setBrowser(browser);
-    }
+import static junit.framework.TestCase.fail;
 
+public class NavigationTest extends BaseTest {
     @Test
     public void navigates() {
         LoginPage LoginPage = new LoginPage();
         LoginPage.visit();
         Assert.assertTrue(LoginPage.isOnPage());
+        Assert.assertEquals("https://www.saucedemo.com/", browser.getCurrentUrl());
     }
 
     @Test
@@ -40,6 +39,19 @@ public class NavigationTest extends BaseTest {
     public void noOnPageNoVisit() {
         NoOnPage noOnPage = new NoOnPage();
 
-        noOnPage.visit();
+        try {
+            noOnPage.visit();
+            fail("Expected a PageObjectException that was never thrown");
+        } catch (PageObjectException ignored) {
+        }
+    }
+
+    @Test
+    public void navigatesWithBaseURLAndPath() {
+        PathPage pathPage = new PathPage();
+        pathPage.visit();
+
+        Assert.assertTrue(pathPage.isOnPage());
+        Assert.assertEquals("https://www.saucedemo.com/inventory.html", browser.getCurrentUrl());
     }
 }

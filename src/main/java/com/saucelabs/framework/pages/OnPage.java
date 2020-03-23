@@ -8,4 +8,5 @@ import java.lang.annotation.*;
 public @interface OnPage {
     String url() default "";
     String title() default "";
+    String path() default "";
 }
