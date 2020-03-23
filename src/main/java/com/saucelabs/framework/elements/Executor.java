@@ -7,10 +7,8 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.concurrent.Callable;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -18,35 +16,33 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class Executor {
     public static int waitTime = 10;
 
-    static boolean isStale(WebElement element) {
-        try {
-            element.getAttribute("anything");
-            return false;
-        } catch (StaleElementReferenceException e) {
-            return true;
-        }
+    static void forceRun(Element element, Runnable block) {
+        element.locate();
+        block.run();
+    }
+
+    @SneakyThrows
+    static Object forceRun(Element element, Callable<Object> block) {
+        element.locate();
+        return block.call();
     }
 
     static void run(Element element, Runnable block) {
         try {
-            locate(element);
-            block.run();
+            forceRun(element, block);
         } catch (StaleElementReferenceException e) {
             element.reset();
-            locate(element);
-            block.run();
+            forceRun(element, block);
         }
     }
 
     @SneakyThrows
     static Object run(Element element, Callable<Object> block) {
         try {
-            locate(element);
-            return block.call();
+            return forceRun(element, block);
         } catch (StaleElementReferenceException e) {
             element.reset();
-            locate(element);
-            return block.call();
+            return forceRun(element, block);
         }
     }
 
@@ -55,8 +51,7 @@ public class Executor {
         long expireTime = Instant.now().toEpochMilli() + SECONDS.toMillis(waitTime);
         while (true) {
             try {
-                locate(element);
-                block.run();
+                forceRun(element, block);
                 break;
             } catch (NoSuchElementException | ElementNotEnabledException | ElementNotInteractableException | StaleElementReferenceException e) {
                 if (Instant.now().toEpochMilli() > expireTime) {
@@ -78,8 +73,7 @@ public class Executor {
         long expireTime = Instant.now().toEpochMilli() + SECONDS.toMillis(waitTime);
         while (true) {
             try {
-                locate(element);
-                return block.call();
+                return forceRun(element, block);
             } catch (NoSuchElementException | ElementNotEnabledException | ElementNotInteractableException e) {
                 if (Instant.now().toEpochMilli() > expireTime) {
                     String message = "After attempting for " + waitTime + " seconds, " + e.getMessage();
@@ -91,21 +85,6 @@ public class Executor {
                     throw Exceptions.createWithMessage(e, message);
                 }
                 element.reset();
-            }
-        }
-    }
-
-    public static List<WebElement> locateAll(Element element) {
-        return element.getDriver().findElements(element.getLocator());
-    }
-
-    // This is always called from context of the Executor
-    private static void locate(Element element) {
-        if (element.webElement == null) {
-            if (element.getIndex() != 0) {
-                element.setWebElement(locateAll(element).get(element.getIndex()));
-            } else {
-                element.setWebElement(element.getDriver().findElement(element.getLocator()));
             }
         }
     }
