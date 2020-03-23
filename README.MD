@@ -30,10 +30,10 @@ See LICENSE file for details.
 3. Basic element wrapper
 4. Synchronization implementation for element methods
 5. Staleness Relocation
+6. Collection Support
 
 ### Future Ideas
 0. Logging Support
-1. Element Collection Wrapper
 2. Page Object Implementation
 3. Data Object Implementation
 4. Subclass Elements

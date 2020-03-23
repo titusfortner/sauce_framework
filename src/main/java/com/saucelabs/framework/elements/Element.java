@@ -9,7 +9,12 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
 public class Element {
+    @Getter private int index = 0;
     @Getter private By locator;
     @Getter private Browser browser;
     @Setter WebElement webElement;
@@ -19,6 +24,11 @@ public class Element {
     public Element(Browser browser, By locator) {
         this.locator = locator;
         this.browser = browser;
+    }
+
+    public Element(Browser browser, By locator, int index) {
+        this(browser, locator);
+        this.index = index;
     }
 
     //
@@ -62,7 +72,7 @@ public class Element {
         } else {
             try {
                 Element c = (Element) o;
-                return c.getLocator().equals(locator);
+                return c.getLocator().equals(locator) && c.getIndex() == index;
             } catch (ClassCastException e) {
                 return false;
             }
@@ -127,5 +137,17 @@ public class Element {
 
     public WebDriver getDriver() {
         return browser.getDriver();
+    }
+
+    public List<Element> toList() {
+        List<WebElement> webElements = executor.locateAll(this);
+        List<Element> elements = new ArrayList<>();
+
+        IntStream.range(0, webElements.size()).forEach(index -> {
+            Element element = new Element(browser, locator, index);
+            element.setWebElement(webElements.get(index));
+            elements.add(element);
+        });
+        return elements;
     }
 }

@@ -10,6 +10,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -94,10 +95,18 @@ public class Executor {
         }
     }
 
+    public List<WebElement> locateAll(Element element) {
+        return element.getDriver().findElements(element.getLocator());
+    }
+
     // This is always called from context of the Executor
     private void locate(Element element) {
         if (element.webElement == null) {
-            element.setWebElement(element.getDriver().findElement(element.getLocator()));
+            if (element.getIndex() != 0) {
+                element.setWebElement(locateAll(element).get(element.getIndex()));
+            } else {
+                element.setWebElement(element.getDriver().findElement(element.getLocator()));
+            }
         }
     }
 }
