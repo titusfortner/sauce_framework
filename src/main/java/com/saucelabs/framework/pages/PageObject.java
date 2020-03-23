@@ -1,20 +1,30 @@
 package com.saucelabs.framework.pages;
 
 import com.saucelabs.framework.Browser;
+import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.exceptions.PageObjectException;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.SneakyThrows;
+
+import java.lang.reflect.Field;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public abstract class PageObject {
     private static ThreadLocal<Browser> browserThreadLocal = new ThreadLocal<>();
     protected Browser browser = getBrowser();
     @Getter private String baseURL;
+    @Getter private Set<String> elements = new HashSet<>();
     OnPage required;
 
     public PageObject() {
         required = this.getClass().getAnnotation(OnPage.class);
+        for (Field field : this.getClass().getDeclaredFields()) {
+            if (Element.class.isAssignableFrom(field.getType())) {
+                elements.add(field.getName());
+            }
+        }
     }
 
     public static Browser getBrowser() {
@@ -51,6 +61,26 @@ public abstract class PageObject {
         if (!required.path().isEmpty() && !browser.getCurrentUrl().equals(this.getBaseURL() + required.path())) {
             return false;
         }
-        return required.title().isEmpty() || browser.getTitle().equals(required.title());
+        if (!required.title().isEmpty() && !browser.getTitle().equals(required.title())) {
+            return false;
+        }
+        for (String element : required.elements()) {
+            Element htmlElement = (Element) getElement(element);
+            if (!htmlElement.doesExist()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Object getElement(String key) {
+        try {
+            Field declaredField = this.getClass().getDeclaredField(key);
+            declaredField.setAccessible(true);
+            return declaredField.get(this);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

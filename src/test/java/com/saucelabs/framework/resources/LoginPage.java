@@ -5,7 +5,7 @@ import com.saucelabs.framework.pages.OnPage;
 import com.saucelabs.framework.pages.PageObject;
 import org.openqa.selenium.By;
 
-@OnPage(url="https://www.saucedemo.com/")
+@OnPage(url="https://www.saucedemo.com/", title="Swag Labs", elements={"usernameField", "passwordField"})
 public class LoginPage extends PageObject {
     private Element usernameField = browser.element(By.id("user-name"));
     private Element passwordField = browser.element(By.id("password"));

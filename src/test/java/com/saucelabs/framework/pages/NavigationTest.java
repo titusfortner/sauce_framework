@@ -7,6 +7,7 @@ import com.saucelabs.framework.resources.BadURLPage;
 import com.saucelabs.framework.resources.LoginPage;
 import com.saucelabs.framework.resources.NoOnPage;
 import com.saucelabs.framework.resources.PathPage;
+import com.saucelabs.framework.resources.BadElementsPage;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -53,5 +54,13 @@ public class NavigationTest extends BaseTest {
 
         Assert.assertTrue(pathPage.isOnPage());
         Assert.assertEquals("https://www.saucedemo.com/inventory.html", browser.getCurrentUrl());
+    }
+
+    @Test
+    public void onPageWithBadElements() {
+        BadElementsPage badElementsPage = new BadElementsPage();
+        badElementsPage.visit();
+
+        Assert.assertFalse(badElementsPage.isOnPage());
     }
 }
