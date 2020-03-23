@@ -31,11 +31,12 @@ See LICENSE file for details.
 4. Synchronization implementation for element methods
 5. Staleness Relocation
 6. Collection Support
-
-### Future Ideas
-0. Logging Support
 2. Page Object Implementation
 3. Data Object Implementation
+
+### Future Ideas
+1. Support Nested Elements
+2. Logging Support
 4. Subclass Elements
 5. Automatic Form Filling
 6. Automatic Data Reading

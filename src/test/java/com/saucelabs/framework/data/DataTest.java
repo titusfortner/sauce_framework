@@ -53,4 +53,14 @@ public class DataTest {
         String value = (String) userData.getValue("username");
         Assert.assertEquals("foo", value);
     }
+
+    @Test
+    public void evaluatesEquality() {
+        UserData userData1 = UserData.valid();
+        UserData userData2 = new UserData();
+        userData2.setUsername("standard_user");
+        userData2.setPassword("secret_sauce");
+
+        Assert.assertEquals(userData1, userData2);
+    }
 }
