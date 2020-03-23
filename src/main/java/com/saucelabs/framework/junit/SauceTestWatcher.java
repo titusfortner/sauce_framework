@@ -14,6 +14,10 @@ public class SauceTestWatcher extends BaseTestWatcher {
         sauceOptions = getSauceOptions();
         sauceOptions.setName(description.getMethodName());
 
+        if (System.getProperty("BUILD_NAME") != null) {
+            sauceOptions.setBuild(System.getProperty("BUILD_NAME"));
+        }
+
         sauceSession = getSauceSession();
         sauceSession.start();
     }

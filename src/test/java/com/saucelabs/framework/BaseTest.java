@@ -7,8 +7,12 @@ import org.junit.Before;
 public class BaseTest {
     public Browser browser;
 
+//    @Rule
+//    public BaseTestWatcher testWatcher = new SauceTestWatcher();
+
     @Before
     public void setup() {
+//      browser = new Browser((RemoteWebDriver) testWatcher.getDriver());
         browser = new Browser();
         Executor.waitTime = 5;
     }
