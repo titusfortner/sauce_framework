@@ -26,7 +26,7 @@ public class Element {
         this.browser = browser;
     }
 
-    public Element(Browser browser, By locator, int index) {
+    private Element(Browser browser, By locator, int index) {
         this(browser, locator);
         this.index = index;
     }
