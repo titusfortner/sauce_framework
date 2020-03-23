@@ -40,11 +40,13 @@ public class SauceTestWatcher extends BaseTestWatcher {
         return sauceSession.getDriver();
     }
 
+    @Override
     protected void succeeded(Description description) {
         sauceSession.stop("passed");
     }
 
-    protected void failed(Description description) {
+    @Override
+    protected void failed(Throwable e, Description description) {
         sauceSession.stop("failed");
     }
 }
