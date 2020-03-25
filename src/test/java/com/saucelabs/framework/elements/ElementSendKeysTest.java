@@ -2,6 +2,7 @@ package com.saucelabs.framework.elements;
 
 import com.saucelabs.framework.BaseTest;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -79,6 +80,7 @@ public class ElementSendKeysTest extends BaseTest {
     }
 
     @Test()
+    @Ignore("flaky")
     public void clearErrorsWhenElementNotReadableAfterWait() {
         browser.get("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("good_luck"));
