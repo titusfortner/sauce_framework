@@ -8,6 +8,7 @@ import com.saucelabs.framework.resources.LoginPage;
 import com.saucelabs.framework.resources.NoOnPage;
 import com.saucelabs.framework.resources.PathPage;
 import com.saucelabs.framework.resources.BadElementsPage;
+import com.saucelabs.framework.resources.BaseURLPage;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -62,5 +63,13 @@ public class NavigationTest extends BaseTest {
         badElementsPage.visit();
 
         Assert.assertFalse(badElementsPage.isOnPage());
+    }
+
+    @Test
+    public void navigatesWithBaseURLAndEmptyPath() {
+        BaseURLPage baseURLPage = new BaseURLPage();
+        baseURLPage.visit();
+
+        Assert.assertEquals("https://www.saucedemo.com/", browser.getCurrentUrl());
     }
 }
