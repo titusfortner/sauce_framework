@@ -4,14 +4,13 @@ import com.saucelabs.framework.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
 public class ElementCollectionTest extends BaseTest {
     @Test
     public void toListLocatesElements() {
-        browser.get("http://watir.com/examples/collections.html");
+        browser.goTo("http://watir.com/examples/collections.html");
         Element element = new Element(browser, By.tagName("span"));
         element.doesExist();
 
@@ -24,7 +23,7 @@ public class ElementCollectionTest extends BaseTest {
 
     @Test
     public void toListElementRelocatesStale() {
-        browser.get("http://watir.com/examples/collections.html");
+        browser.goTo("http://watir.com/examples/collections.html");
         Element element = new Element(browser, By.tagName("span"));
         List<Element> elementList = element.toList();
 

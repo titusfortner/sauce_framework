@@ -14,7 +14,7 @@ import static junit.framework.TestCase.fail;
 public class ElementStateTest extends BaseTest {
     @Test
     public void elementExists() {
-        browser.get("https://www.saucedemo.com");
+        browser.goTo("https://www.saucedemo.com");
         Element element = browser.element(By.id("user-name"));
 
         Assert.assertTrue(element.doesExist());
@@ -35,7 +35,7 @@ public class ElementStateTest extends BaseTest {
 
     @Test
     public void elementPresentWhenDisplayed() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_interests_dentistry"));
 
         Assert.assertTrue(element.isPresent());
@@ -43,7 +43,7 @@ public class ElementStateTest extends BaseTest {
 
     @Test
     public void elementPresentWhenStale() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_interests_dentistry"));
         element.doesExist();
 
@@ -67,7 +67,7 @@ public class ElementStateTest extends BaseTest {
 
     @Test
     public void elementNotPresentWhenExistsAndNotDisplayedWithoutWaiting() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_interests_dolls"));
 
         Instant start = Instant.now();
@@ -81,7 +81,7 @@ public class ElementStateTest extends BaseTest {
 
     @Test
     public void elementEnabled() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_occupation"));
 
         Assert.assertTrue(element.isEnabled());
@@ -89,7 +89,7 @@ public class ElementStateTest extends BaseTest {
 
     @Test
     public void elementEnabledWhenStale() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_occupation"));
         element.doesExist();
 
@@ -100,7 +100,7 @@ public class ElementStateTest extends BaseTest {
 
     @Test
     public void elementNotEnabledWithoutWaiting() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_species"));
 
         Instant start = Instant.now();
@@ -129,7 +129,7 @@ public class ElementStateTest extends BaseTest {
 
     @Test
     public void elementStale() {
-        browser.get("https://www.saucedemo.com");
+        browser.goTo("https://www.saucedemo.com");
         Element element = browser.element(By.id("user-name"));
         element.doesExist();
         browser.refresh();
@@ -139,7 +139,7 @@ public class ElementStateTest extends BaseTest {
 
     @Test
     public void elementNotStale() {
-        browser.get("https://www.saucedemo.com");
+        browser.goTo("https://www.saucedemo.com");
         Element element = browser.element(By.id("user-name"));
         element.doesExist();
 

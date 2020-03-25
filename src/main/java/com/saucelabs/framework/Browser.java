@@ -54,11 +54,11 @@ public class Browser {
     // Navigation
     //
 
-    public void get(String url) {
+    public void goTo(String url) {
         getDriver().navigate().to(url);
     }
 
-    public void get(URL url) {
+    public void goTo(URL url) {
         getDriver().navigate().to(url);
     }
 

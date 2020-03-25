@@ -17,7 +17,7 @@ public class ElementSendKeysTest extends BaseTest {
 
     @Test
     public void clearElementTextField() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_occupation"));
 
         element.clear();
@@ -44,7 +44,7 @@ public class ElementSendKeysTest extends BaseTest {
 
     @Test()
     public void clearTextErrorsWhenElementNotTextField() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("messages"));
 
         Instant start = Instant.now();
@@ -62,7 +62,7 @@ public class ElementSendKeysTest extends BaseTest {
 
     @Test()
     public void clearErrorsWhenElementDisabledAfterWait() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_species"));
 
         Instant start = Instant.now();
@@ -80,7 +80,7 @@ public class ElementSendKeysTest extends BaseTest {
 
     @Test()
     public void clearErrorsWhenElementNotReadableAfterWait() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("good_luck"));
 
         Instant start = Instant.now();
@@ -115,7 +115,7 @@ public class ElementSendKeysTest extends BaseTest {
 
     @Test
     public void appendText() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_occupation"));
 
         element.appendText("s are boring");
@@ -142,7 +142,7 @@ public class ElementSendKeysTest extends BaseTest {
 
     @Test()
     public void appendTextErrorsWhenElementNotTextField() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("messages"));
 
         Instant start = Instant.now();
@@ -160,7 +160,7 @@ public class ElementSendKeysTest extends BaseTest {
 
     @Test()
     public void appendTextErrorsWhenElementDisabledAfterWait() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_species"));
 
         Instant start = Instant.now();
@@ -178,7 +178,7 @@ public class ElementSendKeysTest extends BaseTest {
 
     @Test()
     public void appendTextErrorsWhenElementReadOnlyTextField() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("good_luck"));
 
         Instant start = Instant.now();
@@ -213,7 +213,7 @@ public class ElementSendKeysTest extends BaseTest {
 
     @Test
     public void setText() {
-        browser.get("http://watir.com/examples/forms_with_input_elements.html");
+        browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_occupation"));
 
         element.setText("Just This");
