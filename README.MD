@@ -13,6 +13,7 @@ Inspiration for this code drawn from numerous places including:
 
 See LICENSE file for details.
 
+
 ### Goals
 
 1. Easy to toggle Local & Remote
@@ -24,6 +25,7 @@ See LICENSE file for details.
 7. Test Runner agnostic (Thread Safe!!)
 8. Discourage imperative test writing
 
+
 ### Status
 1. Implementation for generating Browser Options
 2. Basic browser wrapper
@@ -31,11 +33,13 @@ See LICENSE file for details.
 4. Synchronization implementation for element methods
 5. Staleness Relocation
 6. Collection Support
-2. Page Object Implementation
-3. Data Object Implementation
+7. Page Object Implementation
+8. Data Object Implementation
+9. Nested Elements Supported
+
 
 ### Future Ideas
-1. Support Nested Elements
+1. Direct Support for IFrames
 2. Subclass Elements
 3. Automatic Form Filling
 4. Automatic Data Reading

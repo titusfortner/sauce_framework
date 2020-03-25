@@ -4,10 +4,7 @@ import com.saucelabs.framework.Browser;
 import com.saucelabs.framework.exceptions.ElementNotEnabledException;
 import lombok.Getter;
 import lombok.Setter;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +12,7 @@ import java.util.stream.IntStream;
 
 public class Element {
     @Getter private int index = 0;
+    @Getter private Element scope;
     @Getter private By locator;
     @Getter private Browser browser;
     @Setter WebElement webElement;
@@ -28,6 +26,11 @@ public class Element {
     private Element(Browser browser, By locator, int index) {
         this(browser, locator);
         this.index = index;
+    }
+
+    private Element(Element element, By locator) {
+        this(element.getBrowser(), locator);
+        this.scope = element;
     }
 
     //
@@ -53,13 +56,19 @@ public class Element {
         }
     }
 
-    public boolean isStale() {
-        return Executor.isStale(webElement);
-    }
-
     // Exception if doesn't exist
     public boolean isEnabled() {
         return (boolean) Executor.run(this, () -> webElement.isEnabled());
+    }
+
+    public boolean isStale() {
+        try {
+            // This can be any wire call
+            Executor.forceRun(this, () -> webElement.getCssValue("stale-check"));
+            return false;
+        } catch (StaleElementReferenceException e) {
+            return true;
+        }
     }
 
     @Override
@@ -125,6 +134,9 @@ public class Element {
     //
 
     void reset() {
+        if (scope != null) {
+            scope.reset();
+        }
         this.webElement = null;
     }
 
@@ -138,8 +150,25 @@ public class Element {
         return browser.getDriver();
     }
 
+    public void locate() {
+        if (webElement == null) {
+            if (scope != null) {
+                scope.locate();
+                setWebElement(scope.webElement.findElement(locator));
+            } else if (index != 0) {
+                setWebElement(locateAll().get(index));
+            } else {
+                setWebElement(getDriver().findElement(locator));
+            }
+        }
+    }
+
+    public List<WebElement> locateAll() {
+        return getDriver().findElements(locator);
+    }
+
     public List<Element> toList() {
-        List<WebElement> webElements = Executor.locateAll(this);
+        List<WebElement> webElements = locateAll();
         List<Element> elements = new ArrayList<>();
 
         IntStream.range(0, webElements.size()).forEach(index -> {
@@ -148,5 +177,9 @@ public class Element {
             elements.add(element);
         });
         return elements;
+    }
+
+    public Element element(By locator) {
+        return new Element(this, locator);
     }
 }
