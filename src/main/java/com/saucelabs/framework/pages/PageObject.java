@@ -15,7 +15,6 @@ import java.util.Set;
 public abstract class PageObject {
     private static ThreadLocal<Browser> browserThreadLocal = new ThreadLocal<>();
     protected Browser browser = getBrowser();
-    //protected String baseURL;
     @Getter private Set<String> elements = new HashSet<>();
     protected OnPage required;
 
@@ -27,7 +26,7 @@ public abstract class PageObject {
             }
         }
     }
-    public String getBaseURL() throws SetBaseUrlException {
+    public String getBaseUrl() throws SetBaseUrlException {
         if(required.url().isEmpty())
         {
             throw new SetBaseUrlException("Set the 'url' of your page object in the @OnPage");
@@ -47,15 +46,15 @@ public abstract class PageObject {
     public void visit() {
         try {
             if (!required.url().isEmpty()) {
-                browser.get(required.url());
+                browser.goTo(required.url());
                 return;
-            } else if (!required.path().isEmpty()) {
-                browser.get(this.getBaseURL() + required.path());
+            } else if (!required.urlPath().isEmpty()) {
+                browser.goTo(this.getBaseUrl() + required.urlPath());
                 return;
             }
         } catch (NullPointerException ignored) {
         }
-        throw new PageObjectException("url or path with baseURL must be defined to visit Page Object " + this.getClass());
+        throw new PageObjectException("url or urlPath with baseURL must be defined to visit Page Object " + this.getClass());
     }
 
     @SneakyThrows
@@ -66,7 +65,7 @@ public abstract class PageObject {
         if (!required.url().isEmpty() && !browser.getCurrentUrl().equals(required.url())) {
             return false;
         }
-        if (!required.path().isEmpty() && !browser.getCurrentUrl().equals(this.getBaseURL() + required.path())) {
+        if (!required.urlPath().isEmpty() && !browser.getCurrentUrl().equals(this.getBaseUrl() + required.urlPath())) {
             return false;
         }
         if (!required.title().isEmpty() && !browser.getTitle().equals(required.title())) {

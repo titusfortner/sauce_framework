@@ -3,11 +3,12 @@ package com.saucelabs.framework.pages;
 import com.saucelabs.framework.BaseTest;
 import com.saucelabs.framework.exceptions.PageObjectException;
 import com.saucelabs.framework.resources.BadTitlePage;
-import com.saucelabs.framework.resources.BadURLPage;
+import com.saucelabs.framework.resources.BadUrlPage;
 import com.saucelabs.framework.resources.LoginPage;
 import com.saucelabs.framework.resources.NoOnPage;
 import com.saucelabs.framework.resources.PathPage;
 import com.saucelabs.framework.resources.BadElementsPage;
+import com.saucelabs.framework.resources.BaseUrlPage;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,10 +24,10 @@ public class NavigationTest extends BaseTest {
     }
 
     @Test
-    public void badURL() {
-        BadURLPage badURLPage = new BadURLPage();
-        badURLPage.visit();
-        Assert.assertFalse(badURLPage.isOnPage());
+    public void badUrl() {
+        BadUrlPage badUrlPage = new BadUrlPage();
+        badUrlPage.visit();
+        Assert.assertFalse(badUrlPage.isOnPage());
     }
 
     @Test
@@ -48,7 +49,7 @@ public class NavigationTest extends BaseTest {
     }
 
     @Test
-    public void navigatesWithBaseURLAndPath() {
+    public void navigatesWithBaseUrlAndPath() {
         PathPage pathPage = new PathPage();
         pathPage.visit();
 
@@ -62,5 +63,13 @@ public class NavigationTest extends BaseTest {
         badElementsPage.visit();
 
         Assert.assertFalse(badElementsPage.isOnPage());
+    }
+
+    @Test
+    public void navigatesWithBaseUrlAndEmptyPath() {
+        BaseUrlPage baseUrlPage = new BaseUrlPage();
+        baseUrlPage.visit();
+
+        Assert.assertEquals("https://www.saucedemo.com/", browser.getCurrentUrl());
     }
 }

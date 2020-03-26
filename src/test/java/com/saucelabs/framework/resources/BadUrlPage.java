@@ -4,5 +4,5 @@ import com.saucelabs.framework.pages.OnPage;
 import com.saucelabs.framework.pages.PageObject;
 
 @OnPage(url="https://www.saucedemo.com")
-public class BadURLPage extends PageObject {
+public class BadUrlPage extends PageObject {
 }

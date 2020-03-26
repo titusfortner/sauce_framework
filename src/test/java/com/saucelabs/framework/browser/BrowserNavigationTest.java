@@ -9,14 +9,14 @@ public class BrowserNavigationTest extends BaseTest {
 
     @Test
     public void get() {
-        browser.get("https://www.saucedemo.com/");
+        browser.goTo("https://www.saucedemo.com/");
         Assert.assertEquals(browser.getCurrentUrl(), "https://www.saucedemo.com/");
     }
 
     @Test
     public void forward() {
-        browser.get("https://www.saucedemo.com/");
-        browser.get("https://www.google.com/");
+        browser.goTo("https://www.saucedemo.com/");
+        browser.goTo("https://www.google.com/");
         browser.back();
         browser.forward();
 
@@ -25,8 +25,8 @@ public class BrowserNavigationTest extends BaseTest {
 
     @Test
     public void back() {
-        browser.get("https://www.saucedemo.com/");
-        browser.get("https://www.google.com/");
+        browser.goTo("https://www.saucedemo.com/");
+        browser.goTo("https://www.google.com/");
         browser.back();
 
         Assert.assertEquals(browser.getCurrentUrl(), "https://www.saucedemo.com/");
@@ -34,7 +34,7 @@ public class BrowserNavigationTest extends BaseTest {
 
     @Test
     public void refresh() {
-        browser.get("https://www.saucedemo.com/");
+        browser.goTo("https://www.saucedemo.com/");
         browser.getDriver().findElement(By.className("btn_action")).click();
         browser.refresh();
 
