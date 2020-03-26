@@ -78,6 +78,10 @@ public class Browser {
     // Actions
     //
 
+    public Object executeScript(String script, Object... args) {
+        return getDriver().executeScript(script, args);
+    }
+
     public void quit() {
         getDriver().quit();
     }
