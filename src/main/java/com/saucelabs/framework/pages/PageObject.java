@@ -3,6 +3,7 @@ package com.saucelabs.framework.pages;
 import com.saucelabs.framework.Browser;
 import com.saucelabs.framework.elements.Element;
 import com.saucelabs.framework.exceptions.PageObjectException;
+import com.saucelabs.framework.exceptions.SetBaseUrlException;
 import lombok.Getter;
 import lombok.SneakyThrows;
 
@@ -26,7 +27,11 @@ public abstract class PageObject {
             }
         }
     }
-    public String getBaseURL(){
+    public String getBaseURL() throws SetBaseUrlException {
+        if(required.url().isEmpty())
+        {
+            throw new SetBaseUrlException("Set the 'url' of your page object in the @OnPage");
+        }
         return required.url();
     };
 
