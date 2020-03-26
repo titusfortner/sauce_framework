@@ -16,7 +16,7 @@ public abstract class PageObject {
     private static ThreadLocal<Browser> browserThreadLocal = new ThreadLocal<>();
     protected Browser browser = getBrowser();
     @Getter private Set<String> elements = new HashSet<>();
-    protected OnPage required;
+    OnPage required;
 
     public PageObject() {
         required = this.getClass().getAnnotation(OnPage.class);
