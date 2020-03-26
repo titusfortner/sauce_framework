@@ -17,7 +17,7 @@ import static org.junit.Assert.fail;
 public class ElementClickTest extends BaseTest {
     @Test
     public void clickElementExistsAndVisible() {
-        browser.get("http://watir.com/examples/non_control_elements.html");
+        browser.goTo("http://watir.com/examples/non_control_elements.html");
         Element element = browser.element(By.id("best_language"));
 
         element.click();
@@ -26,7 +26,7 @@ public class ElementClickTest extends BaseTest {
 
     @Test
     public void clickElementWhenStale() {
-        browser.get("http://watir.com/examples/non_control_elements.html");
+        browser.goTo("http://watir.com/examples/non_control_elements.html");
         Element element = browser.element(By.id("best_language"));
         element.doesExist();
 
@@ -42,7 +42,7 @@ public class ElementClickTest extends BaseTest {
 
     @Test()
     public void clickElementExistsAndEventuallyVisibleAfterWait() {
-        browser.get("http://watir.com/examples/wait.html");
+        browser.goTo("http://watir.com/examples/wait.html");
 
         Element element = browser.element(By.id("bar"));
 
@@ -59,7 +59,7 @@ public class ElementClickTest extends BaseTest {
 
     @Test()
     public void clickElementEventuallyExistsThenEventuallyVisibleAfterWaits() {
-        browser.get("http://watir.com/examples/wait.html");
+        browser.goTo("http://watir.com/examples/wait.html");
 
         Element element = browser.element(By.id("foobar"));
 
@@ -76,7 +76,7 @@ public class ElementClickTest extends BaseTest {
 
     @Test()
     public void clickElementPresentAndEventuallyEnabledAfterWait() {
-        browser.get("http://watir.com/examples/wait.html");
+        browser.goTo("http://watir.com/examples/wait.html");
 
         Element element = browser.element(By.id("btn"));
 
@@ -93,7 +93,7 @@ public class ElementClickTest extends BaseTest {
 
     @Test()
     public void clickErrorsWhenElementPresentAndNeverEnabledAfterWait() {
-        browser.get("http://watir.com/examples/wait.html");
+        browser.goTo("http://watir.com/examples/wait.html");
         Element element = browser.element(By.id("btn"));
 
         Instant start = Instant.now();
@@ -128,7 +128,7 @@ public class ElementClickTest extends BaseTest {
 
     @Test()
     public void clickErrorsWhenElementExistsButNeverVisibleAfterWait() {
-        browser.get("http://watir.com/examples/wait.html");
+        browser.goTo("http://watir.com/examples/wait.html");
         Element element = browser.element(By.id("bar"));
 
         Instant start = Instant.now();
