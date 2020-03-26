@@ -14,9 +14,9 @@ import java.util.Set;
 public abstract class PageObject {
     private static ThreadLocal<Browser> browserThreadLocal = new ThreadLocal<>();
     protected Browser browser = getBrowser();
-    @Getter private String baseURL;
+    //protected String baseURL;
     @Getter private Set<String> elements = new HashSet<>();
-    OnPage required;
+    protected OnPage required;
 
     public PageObject() {
         required = this.getClass().getAnnotation(OnPage.class);
@@ -26,6 +26,9 @@ public abstract class PageObject {
             }
         }
     }
+    public String getBaseURL(){
+        return required.url();
+    };
 
     public static Browser getBrowser() {
         return browserThreadLocal.get();
