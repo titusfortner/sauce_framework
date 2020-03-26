@@ -27,7 +27,7 @@ public class ElementSendKeysTest extends BaseTest {
     // TODO - create element for this
 //    @Test()
 //    public void clearElementPresentAndEventuallyReadableAfterWait() {
-//        browser.get("http://watir.com/examples/wait.html");
+//        browser.goTo("http://watir.com/examples/wait.html");
 //
 //        Element element = browser.element(By.id("btn"));
 //
@@ -125,7 +125,7 @@ public class ElementSendKeysTest extends BaseTest {
     // TODO - create element for this
 //    @Test()
 //    public void appendTextElementPresentAndEventuallyReadableAfterWait() {
-//        browser.get("http://watir.com/examples/wait.html");
+//        browser.goTo("http://watir.com/examples/wait.html");
 //
 //        Element element = browser.element(By.id("btn"));
 //

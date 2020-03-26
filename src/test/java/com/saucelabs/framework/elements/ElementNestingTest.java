@@ -14,7 +14,7 @@ import static junit.framework.TestCase.fail;
 public class ElementNestingTest extends BaseTest {
     @Test
     public void locateNestedElement() {
-        browser.get("http://watir.com/examples/tables.html");
+        browser.goTo("http://watir.com/examples/tables.html");
         Element gregoryRow = new Element(browser, By.id("gregory"));
         Element element = gregoryRow.element(By.tagName("td"));
         element.doesExist();
@@ -24,7 +24,7 @@ public class ElementNestingTest extends BaseTest {
 
     @Test
     public void nestedElementRelocatesWhenStale() {
-        browser.get("http://watir.com/examples/tables.html");
+        browser.goTo("http://watir.com/examples/tables.html");
         Element gregoryRow = new Element(browser, By.id("gregory"));
         Element element = gregoryRow.element(By.tagName("td"));
         element.doesExist();
@@ -35,7 +35,7 @@ public class ElementNestingTest extends BaseTest {
 
     @Test
     public void nestedElementDoesNotExistWithoutWaiting() {
-        browser.get("http://watir.com/examples/tables.html");
+        browser.goTo("http://watir.com/examples/tables.html");
         Element gregoryRow = new Element(browser, By.id("gregory"));
         Element element = gregoryRow.element(By.id("missing"));
 
@@ -50,7 +50,7 @@ public class ElementNestingTest extends BaseTest {
 
     @Test
     public void nestedElementParentDoesNotExistWithoutWaiting() {
-        browser.get("http://watir.com/examples/tables.html");
+        browser.goTo("http://watir.com/examples/tables.html");
         Element gregoryRow = new Element(browser, By.id("missing"));
         Element element = gregoryRow.element(By.tagName("td"));
 
@@ -66,7 +66,7 @@ public class ElementNestingTest extends BaseTest {
 
     @Test
     public void actionErrorsWhenNestedElementNeverExistsAfterWait() {
-        browser.get("http://watir.com/examples/tables.html");
+        browser.goTo("http://watir.com/examples/tables.html");
         Element gregoryRow = new Element(browser, By.id("gregory"));
         Element element = gregoryRow.element(By.id("missing"));
 
@@ -86,7 +86,7 @@ public class ElementNestingTest extends BaseTest {
 
     @Test
     public void actionErrorsWhenParentElementNeverExistsAfterWait() {
-        browser.get("http://watir.com/examples/tables.html");
+        browser.goTo("http://watir.com/examples/tables.html");
         Element gregoryRow = new Element(browser, By.id("missing"));
         Element element = gregoryRow.element(By.tagName("td"));
 

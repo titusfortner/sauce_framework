@@ -4,5 +4,5 @@ import com.saucelabs.framework.pages.PageObject;
 import lombok.Getter;
 
 public class BasePage extends PageObject {
-    @Getter private String baseURL = "https://www.saucedemo.com";
+    @Getter private String baseUrl = "https://www.saucedemo.com";
 }
