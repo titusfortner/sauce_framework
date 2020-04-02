@@ -80,7 +80,6 @@ public class ElementSendKeysTest extends BaseTest {
     }
 
     @Test()
-    @Ignore("flaky")
     public void clearErrorsWhenElementNotReadableAfterWait() {
         browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("good_luck"));
