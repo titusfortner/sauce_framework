@@ -3,6 +3,8 @@ package com.saucelabs.framework;
 import com.saucelabs.framework.elements.Element;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
@@ -93,4 +95,6 @@ public class Browser {
     public Element element(By locator) {
         return new Element(this, locator);
     }
+
+
 }

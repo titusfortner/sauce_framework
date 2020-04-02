@@ -5,6 +5,7 @@ import com.saucelabs.framework.exceptions.ElementNotEnabledException;
 import lombok.Getter;
 import lombok.Setter;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class Element {
         }
     }
 
-    public boolean isPresent() {
+    public boolean isDisplayed() {
         try {
             return (boolean) Executor.run(this, () -> webElement.isDisplayed());
         } catch (NoSuchElementException e) {
@@ -181,5 +182,11 @@ public class Element {
 
     public Element element(By locator) {
         return new Element(this, locator);
+    }
+
+    public void hover() {
+        Actions actions = new Actions(browser.getDriver());
+        WebElement element = browser.getDriver().findElement(locator);
+        actions.moveToElement(element).perform();
     }
 }

@@ -6,7 +6,7 @@
 
     <groupId>com.saucelabs</groupId>
     <artifactId>framework</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
 
     <organization>
         <name>Sauce Labs</name>
@@ -80,7 +80,7 @@
                 <version>2.22.1</version>
                 <configuration>
                     <parallel>all</parallel>
-                    <threadCount>10</threadCount>
+                    <threadCount>20</threadCount>
                     <perCoreThreadCount>false</perCoreThreadCount>
                     <redirectTestOutputToFile>false</redirectTestOutputToFile>
                 </configuration>
