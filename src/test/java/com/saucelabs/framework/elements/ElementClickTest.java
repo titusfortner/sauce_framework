@@ -123,7 +123,7 @@ public class ElementClickTest extends BaseTest {
         } catch (NoSuchElementException e) {
             Instant finish = Instant.now();
             long duration = Duration.between(start, finish).toMillis();
-            Assert.assertTrue(duration > 4000);
+            Assert.assertTrue(duration > 5000);
 
             Assert.assertTrue(e.getMessage().contains("After attempting for"));
         }
