@@ -53,10 +53,18 @@ public class ElementClickTest extends BaseTest {
         element.click();
         Instant finish = Instant.now();
 
-        Integer duration = Math.toIntExact(Duration.between(start, finish).toMillis());
+        Integer duration = getDuration(start, finish);
         System.out.println(duration);
-        assertThat(duration, Matchers.greaterThan(600));
+        assertGreaterThan(duration, 600);
         assertThat(duration, Matchers.lessThan(5000));
+    }
+
+    private void assertGreaterThan(Integer duration, int i) {
+        assertThat(duration, Matchers.greaterThan(i));
+    }
+
+    private int getDuration(Instant start, Instant finish) {
+        return Math.toIntExact(Duration.between(start, finish).toMillis());
     }
 
     @Test()
@@ -70,10 +78,10 @@ public class ElementClickTest extends BaseTest {
         element.click();
         Instant finish = Instant.now();
 
-        long duration = Duration.between(start, finish).toMillis();
+        Integer duration = getDuration(start, finish);
         System.out.println(duration);
-        Assert.assertTrue(duration > 2000);
-        Assert.assertTrue(duration < 5000);
+        assertThat(duration, Matchers.greaterThan(2000));
+        assertThat(duration, Matchers.lessThan(5000));
     }
 
     @Test()
@@ -87,10 +95,11 @@ public class ElementClickTest extends BaseTest {
         element.click();
         Instant finish = Instant.now();
 
-        long duration = Duration.between(start, finish).toMillis();
+        Integer duration = getDuration(start, finish);
+
         System.out.println(duration);
-        Assert.assertTrue(duration > 600);
-        Assert.assertTrue(duration < 5000);
+        assertThat(duration, Matchers.greaterThan(600));
+        assertThat(duration, Matchers.lessThan(5000));
     }
 
     @Test()
@@ -104,9 +113,9 @@ public class ElementClickTest extends BaseTest {
             fail("Expected a Timeout Exception that was never thrown");
         } catch (ElementNotEnabledException e) {
             Instant finish = Instant.now();
-            long duration = Duration.between(start, finish).toMillis();
-            Assert.assertTrue(duration > 5000);
+            Integer duration = getDuration(start, finish);
 
+            assertThat(duration, Matchers.greaterThan(5000));
             Assert.assertTrue(e.getMessage().contains("After attempting for"));
         }
     }
@@ -121,9 +130,9 @@ public class ElementClickTest extends BaseTest {
             fail("Expected a NoSuchElementException that was never thrown");
         } catch (NoSuchElementException e) {
             Instant finish = Instant.now();
-            long duration = Duration.between(start, finish).toMillis();
-            Assert.assertTrue(duration > 5000);
+            Integer duration = getDuration(start, finish);
 
+            assertThat(duration, Matchers.greaterThan(5000));
             Assert.assertTrue(e.getMessage().contains("After attempting for"));
         }
     }
@@ -139,9 +148,9 @@ public class ElementClickTest extends BaseTest {
             fail("Expected a Timeout Exception that was never thrown");
         } catch (ElementNotInteractableException e) {
             Instant finish = Instant.now();
-            long duration = Duration.between(start, finish).toMillis();
-            Assert.assertTrue(duration > 5000);
+            Integer duration = getDuration(start, finish);
 
+            assertThat(duration, Matchers.greaterThan(5000));
             Assert.assertTrue(e.getMessage().contains("After attempting for"));
         }
     }
