@@ -2,6 +2,7 @@ package com.saucelabs.framework.elements;
 
 import com.saucelabs.framework.BaseTest;
 import com.saucelabs.framework.exceptions.ElementNotEnabledException;
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -13,6 +14,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 import static org.junit.Assert.fail;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ElementClickTest extends BaseTest {
     @Test
@@ -51,10 +53,10 @@ public class ElementClickTest extends BaseTest {
         element.click();
         Instant finish = Instant.now();
 
-        long duration = Duration.between(start, finish).toMillis();
+        Integer duration = Math.toIntExact(Duration.between(start, finish).toMillis());
         System.out.println(duration);
-        Assert.assertTrue(duration > 600);
-        Assert.assertTrue(duration < 5000);
+        assertThat(duration, Matchers.greaterThan(600));
+        assertThat(duration, Matchers.lessThan(5000));
     }
 
     @Test()
