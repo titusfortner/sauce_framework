@@ -13,6 +13,14 @@ Inspiration for this code drawn from numerous places including:
 
 See LICENSE file for details.
 
+### Usage
+
+This is not currently released on Maven. For now you can use it locally by running:
+```
+mvn package
+mvn install
+```
+
 
 ### Goals
 
@@ -53,3 +61,27 @@ See LICENSE file for details.
 13. Cookies Wrapper
 14. Scrolling Support
 15. After Hooks
+
+
+### Example Code
+
+ The test directory has a number of examples to demonstrate usage, but basically the syntax looks like:
+ 
+ ```java
+Browser browser = new Browser();
+PageObject.setBrowser(browser);
+browser.goTo("https://www.saucedemo.com/");
+
+userName userName = browser.element(By.id("user-name"));
+userName.setText("standard_user");
+Element password = browser.element(By.id("password"));
+password.setText("secret_sauce");
+Element submitButton = browser.element(By.className("btn_action"));
+submitButton.click();
+
+Assert.assertEquals("https://www.saucedemo.com/inventory.html", browser.getCurrentUrl())
+
+browser.quit();
+```
+
+There are also a basic `DataObject` and `PageObject` classes that will allow you to
