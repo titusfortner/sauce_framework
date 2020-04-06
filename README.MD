@@ -44,6 +44,8 @@ mvn install
 7. Page Object Implementation
 8. Data Object Implementation
 9. Nested Elements Supported
+10. Execute Script
+11. Actions Class Wrapper (Scroll, Hover, Right Click, Double Click, Drag & Drop)
 
 
 ### Future Ideas
@@ -51,16 +53,14 @@ mvn install
 2. Subclass Elements
 3. Automatic Form Filling
 4. Automatic Data Reading
-5. Execute Scripts
-6. Logging Support
-7. API Integration
-8. Common Actions Class Wrapper: Hover, Drag & Drop, etc
-10. Alert Wrapper
-11. Windows Wrapper
-12. Screenshot Wrapper
-13. Cookies Wrapper
-14. Scrolling Support
-15. After Hooks
+5. Logging Support
+6. API Integration
+7. Alert Wrapper
+8. Windows Wrapper
+9. Screenshot Wrapper
+10. Cookies Wrapper
+11. Scrolling Support
+12. After Hooks
 
 
 ### Example Code
