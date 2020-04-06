@@ -85,7 +85,7 @@
                 <version>2.22.1</version>
                 <configuration>
                     <parallel>all</parallel>
-                    <threadCount>20</threadCount>
+                    <threadCount>30</threadCount>
                     <perCoreThreadCount>false</perCoreThreadCount>
                     <redirectTestOutputToFile>false</redirectTestOutputToFile>
                 </configuration>
