@@ -5,6 +5,7 @@ import com.saucelabs.framework.exceptions.ElementNotEnabledException;
 import lombok.Getter;
 import lombok.Setter;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +16,14 @@ public class Element {
     @Getter private Element scope;
     @Getter private By locator;
     @Getter private Browser browser;
-    @Setter WebElement webElement;
+    @Setter @Getter WebElement webElement;
+    @Getter private Actions actions;
 
 
     public Element(Browser browser, By locator) {
         this.locator = locator;
         this.browser = browser;
+        this.actions = new Actions(browser.getDriver());
     }
 
     private Element(Browser browser, By locator, int index) {
@@ -103,9 +106,18 @@ public class Element {
         return getAttribute("value");
     }
 
+    public String getStyle(String property) {
+        return (String) Executor.runWithRetries(this, () -> webElement.getCssValue(property));
+    }
+
     //
     // Action Methods
     //
+
+    protected void scrollElement() {
+        Executor.runWithRetries(this, () ->
+            browser.executeScript("arguments[0].scrollIntoView(true);", webElement));
+    }
 
     // TODO: Move Enabled Check to a Button subclass
     public void click() {
@@ -127,6 +139,38 @@ public class Element {
     // TODO: Move this method to TextField subclass
     public void clear() {
         Executor.runWithRetries(this, () -> webElement.clear());
+    }
+
+    //
+    // Action Class Methods
+    //
+
+    public void hover() {
+        scrollElement();
+        Executor.runWithRetries(this, () ->  actions.moveToElement(webElement).perform());
+    }
+
+    public void doubleClick() {
+        scrollElement();
+        Executor.runWithRetries(this, () ->  actions.doubleClick(webElement).perform());
+    }
+
+    public void rightClick() {
+        scrollElement();
+        Executor.runWithRetries(this, () ->  actions.contextClick(webElement).perform());
+    }
+
+    public void dragAndDrop(Element other) {
+        scrollElement();
+        Executor.runWithRetries(other, () -> {});
+        Executor.runWithRetries(this, () -> {
+            actions.dragAndDrop(webElement, other.getWebElement()).perform();
+        });
+    }
+
+    public void dragAndDropBy(int xOffset, int yOffset) {
+        scrollElement();
+        Executor.runWithRetries(this, () ->  actions.dragAndDropBy(webElement, xOffset, yOffset).perform());
     }
 
     //
