@@ -2,6 +2,7 @@ package com.saucelabs.framework.elements;
 
 import com.saucelabs.framework.BaseTest;
 import com.saucelabs.framework.exceptions.ElementNotEnabledException;
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -13,6 +14,8 @@ import java.time.Duration;
 import java.time.Instant;
 
 import static org.junit.Assert.fail;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class ElementClickTest extends BaseTest {
     @Test
@@ -102,8 +105,8 @@ public class ElementClickTest extends BaseTest {
             fail("Expected a Timeout Exception that was never thrown");
         } catch (ElementNotEnabledException e) {
             Instant finish = Instant.now();
-            long duration = Duration.between(start, finish).toMillis();
-            Assert.assertTrue(duration > 5000);
+            Integer duration = Math.toIntExact(Duration.between(start, finish).toMillis());
+            assertThat(duration, Matchers.greaterThan(5000));
 
             Assert.assertTrue(e.getMessage().contains("After attempting for"));
         }
@@ -120,7 +123,7 @@ public class ElementClickTest extends BaseTest {
         } catch (NoSuchElementException e) {
             Instant finish = Instant.now();
             long duration = Duration.between(start, finish).toMillis();
-            Assert.assertTrue(duration > 5000);
+            Assert.assertTrue(duration > 4000);
 
             Assert.assertTrue(e.getMessage().contains("After attempting for"));
         }
