@@ -38,7 +38,7 @@ public class ElementStateTest extends BaseTest {
         browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_interests_dentistry"));
 
-        Assert.assertTrue(element.isPresent());
+        Assert.assertTrue(element.isDisplayed());
     }
 
     @Test
@@ -49,7 +49,7 @@ public class ElementStateTest extends BaseTest {
 
         browser.refresh();
 
-        Assert.assertTrue(element.isPresent());
+        Assert.assertTrue(element.isDisplayed());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class ElementStateTest extends BaseTest {
         Element element = browser.element(By.id("not-there"));
 
         Instant start = Instant.now();
-        boolean present = element.isPresent();
+        boolean present = element.isDisplayed();
         Instant finish = Instant.now();
         long duration = Duration.between(start, finish).toMillis();
 
@@ -71,7 +71,7 @@ public class ElementStateTest extends BaseTest {
         Element element = browser.element(By.id("new_user_interests_dolls"));
 
         Instant start = Instant.now();
-        boolean present = element.isPresent();
+        boolean present = element.isDisplayed();
         Instant finish = Instant.now();
         long duration = Duration.between(start, finish).toMillis();
 

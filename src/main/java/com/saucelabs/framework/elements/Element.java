@@ -51,7 +51,7 @@ public class Element {
         }
     }
 
-    public boolean isPresent() {
+    public boolean isDisplayed() {
         try {
             return (boolean) Executor.run(this, () -> webElement.isDisplayed());
         } catch (NoSuchElementException e) {
