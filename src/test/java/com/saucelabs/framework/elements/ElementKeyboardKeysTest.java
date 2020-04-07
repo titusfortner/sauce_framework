@@ -14,7 +14,7 @@ public class ElementKeyboardKeysTest extends BaseTest {
 
         Element body = browser.element(By.tagName("body"));
         body.click();
-        body.setText(Keys.ENTER);
+        body.sendKeyboardKeys(Keys.ENTER);
         Element result = browser.element(By.id("result"));
 
         Assert.assertEquals("You entered: ENTER", result.getText());
@@ -25,7 +25,7 @@ public class ElementKeyboardKeysTest extends BaseTest {
 
         Element body = browser.element(By.tagName("body"));
         body.click();
-        body.setText(Keys.ARROW_LEFT);
+        body.sendKeyboardKeys(Keys.ARROW_LEFT);
         Element result = browser.element(By.id("result"));
 
         Assert.assertEquals("You entered: ENTER", result.getText());

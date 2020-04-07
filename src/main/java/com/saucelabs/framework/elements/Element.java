@@ -126,7 +126,7 @@ public class Element {
     }
 
     // TODO: Move this method to TextField subclass
-    public void setText(String text) {
+    public void sendKeyboardKeys(String text) {
         clear();
         appendText(text);
     }
@@ -227,7 +227,7 @@ public class Element {
         return new Element(this, locator);
     }
 
-    public void setText(Keys keyboardKey) {
+    public void sendKeyboardKeys(Keys keyboardKey) {
         Executor.runWithRetries(this, () ->  actions.sendKeys(keyboardKey).perform());
     }
 }
