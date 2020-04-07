@@ -226,4 +226,8 @@ public class Element {
     public Element element(By locator) {
         return new Element(this, locator);
     }
+
+    public void setText(Keys keyboardKey) {
+        Executor.runWithRetries(this, () ->  actions.sendKeys(keyboardKey).perform());
+    }
 }
