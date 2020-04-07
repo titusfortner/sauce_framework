@@ -12,14 +12,14 @@ public class LoginPage extends PageObject {
     private Element submitButton = browser.element(By.className("btn_action"));
 
     public void login(String username, String password) {
-        usernameField.sendKeyboardKeys(username);
-        passwordField.sendKeyboardKeys(password);
+        usernameField.setText(username);
+        passwordField.setText(password);
         submitButton.click();
     }
 
     public void login(UserData user) {
-        usernameField.sendKeyboardKeys(user.getUsername());
-        passwordField.sendKeyboardKeys(user.getPassword());
+        usernameField.setText(user.getUsername());
+        passwordField.setText(user.getPassword());
         submitButton.click();
     }
 }

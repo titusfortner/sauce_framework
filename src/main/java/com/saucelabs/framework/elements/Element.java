@@ -126,7 +126,7 @@ public class Element {
     }
 
     // TODO: Move this method to TextField subclass
-    public void sendKeyboardKeys(String text) {
+    public void setText(String text) {
         clear();
         appendText(text);
     }

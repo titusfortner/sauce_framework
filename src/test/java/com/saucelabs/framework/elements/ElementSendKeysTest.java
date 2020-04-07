@@ -216,7 +216,7 @@ public class ElementSendKeysTest extends BaseTest {
         browser.goTo("http://watir.com/examples/forms_with_input_elements.html");
         Element element = browser.element(By.id("new_user_occupation"));
 
-        element.sendKeyboardKeys("Just This");
+        element.setText("Just This");
         Assert.assertEquals("Just This", element.getValue());
     }
 }
